@@ -1,12 +1,35 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
-
+def keystorePSW = ''
+def keystoreAlias = ''
+def keystoreAliasPSW = ''
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def keystoreFilepath = properties.getProperty("keystore.path")
+def keyfile = ''
+if (keystoreFilepath) {
+    keystorePSW = properties.getProperty("keystore.password")
+    keystoreAlias = properties.getProperty("keystore.alias")
+    keystoreAliasPSW = properties.getProperty("keystore.alias_password")
+    keyfile = file(keystoreFilepath)
+}
+static def releaseTime() {
+    return new Date().format("yyyyMMddHHmmss")
+}
 android {
+    signingConfigs {
+        release {
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPSW
+            storeFile keyfile
+            storePassword keystorePSW
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
     defaultConfig {
         applicationId "com.smallcake.temp"
         minSdkVersion 21
@@ -21,6 +44,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -30,13 +59,37 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kapt {
+        generateStubs = true
+    }
+    dataBinding{
+        enabled = true
+    }
+    viewBinding {
+        enabled = true
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all{
+            outputFileName  = "${applicationId.subSequence(applicationId.lastIndexOf(".")+1,applicationId.length())}_v${versionName}_${releaseTime()}_${baseName}.apk"
+        }
+    }
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //总方法数超过限制>65536支持
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //banner轮播图
+    implementation 'com.youth.banner:banner:2.1.0'
+    //日志
+    implementation 'com.orhanobut:logger:2.2.0'
+    //图片加载
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    //ViewBinding基类
+    implementation 'com.dylanc:viewbinding-ktx:1.0.1'
 }
