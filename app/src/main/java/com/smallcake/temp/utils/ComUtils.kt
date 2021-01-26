@@ -1,6 +1,7 @@
 package com.smallcake.temp.utils
 
 import android.widget.Toast
+import com.orhanobut.logger.Logger
 import com.smallcake.temp.MyApplication
 
 /**
@@ -9,4 +10,14 @@ import com.smallcake.temp.MyApplication
  */
 fun showToast(msg:CharSequence){
     Toast.makeText(MyApplication.instance,msg,Toast.LENGTH_LONG).show()
+}
+
+fun ldd(msg:String){
+    Logger.d(msg)
+}
+fun lee(msg:String){
+    Logger.e(msg)
+}
+fun ljson(msg:String){
+    Logger.json(msg)
 }
