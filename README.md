@@ -2,7 +2,7 @@
 
 
 
-使用Kotlin构建的项目模板，包含大量常用的第三方库和配置项
+使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项10+，工具20+
 
 # 配置
 
@@ -37,11 +37,13 @@ keystore.alias_password = 123456
 
 # 三方库
 
-1. 引入[banner](https://github.com/youth5201314/banner)轮播图
-2. 引入[logger](https://github.com/orhanobut/logger)日志：漂亮易定位
-3. 引入 [glide](https://github.com/bumptech/glide)图片加载
-4. 引入[ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)扩展库：两种方式快速绑定视图
-5. debug模式引入[leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
+1. [banner](https://github.com/youth5201314/banner)轮播图
+2. [logger](https://github.com/orhanobut/logger)日志：漂亮易定位
+3.  [glide](https://github.com/bumptech/glide)图片加载
+4. [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)扩展库：两种方式快速绑定视图
+5. [leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
+6. [XXPermissions](https://github.com/getActivity/XXPermissions)：权限管理
+7. 
 
 
 
@@ -70,6 +72,24 @@ keystore.alias_password = 123456
 10. `StringUtils`：对字符串的判断
 
 11. `FileUtils`：File文件操作
+
+12. `UnitFormatUtils`：单位格式转换，如Byte转KB, MB, GB
+
+13. `NotificationUtils`：通知工具
+
+14. `ScreenUtils`：获取屏幕宽高，截图等
+
+15. `ShapeCreator`：动态设置share,减少大量shape.xml文件
+
+16. `ShareUtils`：系统分享
+
+17. `SpannableStringUtils`：多媒体文本
+
+18. `TimeUtils`：时间格式转换
+
+19. `AnimUtils`：动画
+
+20. `DataBindingAdapter`：dataBinding控件属性扩展
 
     
 

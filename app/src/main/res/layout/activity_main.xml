@@ -7,19 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <EditText
-        android:id="@+id/et1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"/>
-    <EditText
-        android:id="@+id/et2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"/>
-    <EditText
-        android:id="@+id/et3"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"/>
-
+    <Button
+        android:textSize="60sp"
+        android:gravity="center"
+        android:text="你好"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:padding="@dimen/dp_16"
+        android:id="@+id/iv"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_200"/>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
