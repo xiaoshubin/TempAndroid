@@ -41,4 +41,37 @@ keystore.alias_password = 123456
 2. 引入[logger](https://github.com/orhanobut/logger)日志：漂亮易定位
 3. 引入 [glide](https://github.com/bumptech/glide)图片加载
 4. 引入[ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)扩展库：两种方式快速绑定视图
+5. debug模式引入[leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
+
+
+
+
+
+# 我的工具
+
+1. `ActivityCollector.kt`：管理Activity
+
+2. `BannerUtils.kt`：构建轮播图
+
+3. `BottomNavUtils`：导航绑定ViewPager，并装载Fragment
+
+4. `ComUtils.kt`：一些公共方法，如toast，日志输出...
+
+5. `ToastUtil`：防止疯狂toast
+
+6. `AppUtils`：获取包名，版本，安装APK
+
+7. `ClipboardUtils`：前贴板
+
+8. `DpPxUtils`：dp与px单位转换
+
+9. `EditTextUtils`：EditText判空，限制，过滤
+
+10. `StringUtils`：对字符串的判断
+
+11. `FileUtils`：File文件操作
+
+    
+
+
 

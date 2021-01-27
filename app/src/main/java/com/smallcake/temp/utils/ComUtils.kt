@@ -1,19 +1,21 @@
 package com.smallcake.temp.utils
 
-import android.widget.Toast
 import com.orhanobut.logger.Logger
-import com.smallcake.temp.MyApplication
 
 /**
- * 普通的弹出消息
- * @param msg CharSequence
+ * 1.普通的弹出消息
+ * 2.日志输出
  */
+
 fun showToast(msg:CharSequence){
-    Toast.makeText(MyApplication.instance,msg,Toast.LENGTH_LONG).show()
+    ToastUtil.showLong(msg)
 }
 
 fun ldd(msg:String){
     Logger.d(msg)
+}
+fun lww(msg:String){
+    Logger.w(msg)
 }
 fun lee(msg:String){
     Logger.e(msg)

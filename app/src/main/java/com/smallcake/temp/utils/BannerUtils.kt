@@ -11,7 +11,8 @@ import com.youth.banner.indicator.CircleIndicator
 
 /**
 
-
+【轮播图工具类】
+使用方法：
 val imgs = arrayListOf(
 "https://ss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/9c16fdfaaf51f3de9ba8ee1194eef01f3a2979a8.jpg",
 "https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w=580/sign=6e3b71dd9f2f07085f052a08d926b865/25d69eec08fa513dcf7a0f4c3c6d55fbb3fbd92e.jpg"
@@ -22,11 +23,13 @@ bindBanner(this, bind.banner, imgs)
  * @param banner Banner
  * @param datas List<String>
  */
-fun bindBanner(context: AppCompatActivity, banner: Banner<*, *>, datas: List<String>) {
-    banner.adapter = ImgBannerAdapter(datas)
-    banner.addBannerLifecycleObserver(context)
-    banner.indicator = CircleIndicator(context)
+object BannerUtils{
+    fun bindBanner(context: AppCompatActivity, banner: Banner<*, *>, datas: List<String>) {
+        banner.adapter = ImgBannerAdapter(datas)
+        banner.addBannerLifecycleObserver(context)
+        banner.indicator = CircleIndicator(context)
 
+    }
 }
 
 /**

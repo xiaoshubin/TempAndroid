@@ -13,9 +13,11 @@ import com.orhanobut.logger.Logger
  */
 class MyApplication : Application() {
     companion object{
-        var instance:MyApplication?=null
+       lateinit var instance:MyApplication
     }
-    init {
+
+    override fun onCreate() {
+        super.onCreate()
         instance = this
         Logger.addLogAdapter(AndroidLogAdapter())
     }

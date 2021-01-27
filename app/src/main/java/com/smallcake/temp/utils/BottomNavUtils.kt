@@ -23,6 +23,13 @@ import com.smallcake.temp.listener.BottomNavListener
  * Date: 2020/8/17
  * author: SmallCake
  * 地址导航绑定ViewPager，并装载Fragment
+ * 使用：
+BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
+BottomNavUtils.setListener(BottomNavListener {when(it){
+0 -> showToast("选中了首页")
+1 -> showToast("选中了列表")
+2 -> showToast("选中了我的")
+} })
  */
 object BottomNavUtils {
     private val tabSelectedImgs = intArrayOf(
