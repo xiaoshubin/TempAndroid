@@ -5,6 +5,9 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.smallcake.temp.module.appModule
+import okhttp3.OkHttpClient
+import org.koin.core.context.startKoin
 
 
 /**
@@ -20,6 +23,15 @@ class MyApplication : Application() {
         super.onCreate()
         instance = this
         Logger.addLogAdapter(AndroidLogAdapter())
+        startKoin{
+            modules(appModule)
+        }
+        initHttp()
+    }
+    fun initHttp(){
+        val okHttpClient:OkHttpClient =  OkHttpClient.Builder().build()
+
+
     }
 
 

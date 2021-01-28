@@ -2,7 +2,7 @@
 
 
 
-使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项10+，工具20+
+使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项10，工具20
 
 # 配置
 
@@ -37,13 +37,14 @@ keystore.alias_password = 123456
 
 # 三方库
 
-1. [banner](https://github.com/youth5201314/banner)轮播图
-2. [logger](https://github.com/orhanobut/logger)日志：漂亮易定位
-3.  [glide](https://github.com/bumptech/glide)图片加载
-4. [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)扩展库：两种方式快速绑定视图
+1. [banner](https://github.com/youth5201314/banner)：轮播图
+2. [logger](https://github.com/orhanobut/logger)：日志
+3.  [glide](https://github.com/bumptech/glide)：图片加载
+4. [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)：viewBinding扩展库
 5. [leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
 6. [XXPermissions](https://github.com/getActivity/XXPermissions)：权限管理
-7. 
+7. [koin](https://github.com/InsertKoinIO/koin)：依赖注入
+8. [retrofit](https://github.com/square/retrofit)，[okhttp](https://github.com/square/okhttp)，[gson](https://github.com/google/gson)：网络
 
 
 
@@ -89,7 +90,7 @@ keystore.alias_password = 123456
 
 19. `AnimUtils`：动画
 
-20. `DataBindingAdapter`：dataBinding控件属性扩展
+20. `DataBindingAdapter`：dataBinding控件xml属性扩展
 
     
 

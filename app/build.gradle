@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'koin'
 }
 def keystorePSW = ''
 def keystoreAlias = ''
@@ -95,4 +96,10 @@ dependencies {
     implementation 'com.dylanc:viewbinding-ktx:1.0.1'
     //权限管理
     implementation 'com.hjq:xxpermissions:9.8'
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    //网络请求框架
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

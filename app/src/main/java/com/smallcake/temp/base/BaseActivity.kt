@@ -14,6 +14,7 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         addActivity(this)
 
+
     }
     override fun onDestroy() {
         super.onDestroy()
