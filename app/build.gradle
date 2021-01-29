@@ -84,6 +84,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     //总方法数超过限制>65536支持
     implementation 'androidx.multidex:multidex:2.0.1'
     //banner轮播图
@@ -97,9 +98,19 @@ dependencies {
     //权限管理
     implementation 'com.hjq:xxpermissions:9.8'
     // Koin for Android
+    implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
     //网络请求框架
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'//okhttp
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'//拦截器
+    implementation 'com.google.code.gson:gson:2.8.6'//gson转换
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'//对象转换
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'//Rxjava转换
+    //Rxjava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //pop弹框
+    implementation 'com.lxj:xpopup:2.2.17'
+
 }

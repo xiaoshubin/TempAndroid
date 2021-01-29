@@ -51,7 +51,7 @@ object AppUtils {
     fun installApk(activity: Activity, downloadApk: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         val file = File(downloadApk)
-        ldd("安装路径==$downloadApk")
+//        ldd("安装路径==$downloadApk")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val apkUri = FileProvider.getUriForFile(activity,"${getAppPackageName()}.fileprovider",file)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

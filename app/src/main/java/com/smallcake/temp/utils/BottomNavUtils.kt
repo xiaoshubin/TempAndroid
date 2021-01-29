@@ -60,15 +60,15 @@ object BottomNavUtils {
                 return fragments.size
             }
 
-            override fun getItem(i: Int): Fragment {
-                return fragments[i]
+            override fun getItem(index: Int): Fragment {
+                return fragments[index]
             }
 
             override fun getPageTitle(position: Int): CharSequence? {
-                return tabNames.get(position)
+                return tabNames[position]
             }
         }
-        viewPager.setOffscreenPageLimit(tabNames.size)
+        viewPager.offscreenPageLimit = tabNames.size
         initTabBindViewPager(tabLayout, viewPager)
     }
 

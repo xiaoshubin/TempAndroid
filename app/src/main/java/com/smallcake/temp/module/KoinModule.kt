@@ -1,24 +1,37 @@
 package com.smallcake.temp.module
 
+import android.content.Context
+import com.lxj.xpopup.XPopup
+import com.smallcake.temp.base.Constant
+import com.smallcake.temp.http.DataProvider
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
-interface HelloRepository {
-    fun giveHello(): String
-}
 
-class HelloRepositoryImpl() :HelloRepository {
-     override fun giveHello() = "Hello Koin"
-}
-class MySimplePresenter(val repo: HelloRepository) {
-
-    fun sayHello() = "${repo.giveHello()} from $this"
-}
-
+/**
+ * 依赖注入module
+ */
+val logging:HttpLoggingInterceptor =  HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+var okHttpClient: OkHttpClient = OkHttpClient.Builder()
+    .addInterceptor(logging)
+    .build()
 val appModule = module {
+    //单例，加载圈圈
+    single { (context:Context) -> XPopup.Builder(context).asLoading().setTitle("加载中...") }
+    //单例，retrofit
+    single {
+         Retrofit.Builder()
+            .baseUrl(Constant.BASE_URL)
+            .client(okHttpClient)
+             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    //网络数据提供者
+    single { DataProvider() }
 
-    // single instance of HelloRepository
-    single<HelloRepository> { HelloRepositoryImpl() }
-
-    // Simple Presenter Factory
-    single { MySimplePresenter(get()) }
 }
