@@ -12,10 +12,11 @@ import com.smallcake.temp.MyApplication
 class ToastUtil private constructor() {
     companion object {
         private var toast: Toast? = null
+        @JvmStatic
         fun showLong(message: CharSequence) {
             show(message, Toast.LENGTH_LONG)
         }
-
+        @JvmStatic
         fun showShort(message: CharSequence) {
             show(message, Toast.LENGTH_SHORT)
         }

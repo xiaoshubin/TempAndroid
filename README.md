@@ -44,7 +44,9 @@ keystore.alias_password = 123456
 5. [leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
 6. [XXPermissions](https://github.com/getActivity/XXPermissions)：权限管理
 7. [koin](https://github.com/InsertKoinIO/koin)：依赖注入
-8. [retrofit](https://github.com/square/retrofit)，[okhttp](https://github.com/square/okhttp)，[gson](https://github.com/google/gson)：网络
+8. [retrofit](https://github.com/square/retrofit)，[converter-gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson/src/main/java/retrofit2/converter/gson)，[RxJava2 Adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2)，[okhttp](https://github.com/square/okhttp)，[gson](https://github.com/google/gson)：网络
+9. [RxJava](https://github.com/ReactiveX/RxJava)：Rxjava2，限制官方已经发布3.0.9了,使用参考[RxJava2-Android-Samples](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples)
+10. [XPopup](https://github.com/li-xiaojun/XPopup)：非常好用的Pop弹框
 
 
 

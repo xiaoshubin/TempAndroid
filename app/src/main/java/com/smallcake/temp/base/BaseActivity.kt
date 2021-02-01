@@ -14,6 +14,7 @@ import org.koin.core.parameter.parametersOf
  * Activity基类
  */
 abstract class BaseActivity: AppCompatActivity() {
+
     protected val dataProvider: DataProvider = get()
     protected val dialog:LoadingPopupView by inject{parametersOf(this)}
 

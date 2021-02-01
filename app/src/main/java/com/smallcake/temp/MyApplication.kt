@@ -7,6 +7,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.smallcake.temp.module.appModule
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 
@@ -24,6 +25,7 @@ class MyApplication : Application() {
         instance = this
         Logger.addLogAdapter(AndroidLogAdapter())
         startKoin{
+            androidContext(this@MyApplication)
             modules(appModule)
         }
         initHttp()
