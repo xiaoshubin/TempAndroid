@@ -1,6 +1,8 @@
 package com.smallcake.temp.module
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.lxj.xpopup.XPopup
 import com.smallcake.temp.api.impl.MobileImpl
 import com.smallcake.temp.api.impl.WeatherImpl
@@ -18,6 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * 依赖注入module
  */
+var gson: Gson? = GsonBuilder()
+    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+    .serializeNulls()
+    .create()
 val loggingInterceptor:HttpLoggingInterceptor =  HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 var okHttpClient: OkHttpClient = OkHttpClient.Builder()
     .addInterceptor(loggingInterceptor)
@@ -31,7 +37,7 @@ val appModule = module {
             .baseUrl(url?: Constant.BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
     single {
@@ -39,7 +45,7 @@ val appModule = module {
             .baseUrl( Constant.BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
     //网络数据提供者

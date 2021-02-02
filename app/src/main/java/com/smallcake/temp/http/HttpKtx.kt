@@ -5,9 +5,11 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import com.lxj.xpopup.impl.LoadingPopupView
+import com.smallcake.temp.utils.ldd
 import com.smallcake.temp.utils.lee
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -32,11 +34,24 @@ fun <T> Observable<T>.im(): Observable<T> {
  * @param dialog LoadingPopupView?
  */
 fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> Unit)? = null,dialog: LoadingPopupView? = null,lifecycleOwner: LifecycleOwner?=null){
+    var lifecycleOwnerNet:LifecycleOwner?=null
    return subscribe(object :OnDataSuccessListener<T>(dialog){
+
        override fun onStart() {
            super.onStart()
-           lifecycleOwner?.lifecycle?.addObserver(NetLifeObserver(dispose()))
+           //绑定生命周期
+           if (lifecycleOwnerNet==null){//判空，避免多次注册
+               lifecycleOwnerNet = lifecycleOwner
+               lifecycleOwnerNet?.let {
+                   it.lifecycle.addObserver(NetLifeObserver(this,it.lifecycle))
+               }
+           }
+
+
        }
+
+
+
        override fun onSuccess(t: T) {
            success.invoke(t)
        }
@@ -50,16 +65,29 @@ fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> 
    })
 }
 
+
+
+
 /**
  * 生命周期观察者
+ * 当页面关闭，取消网络请求
  */
-class NetLifeObserver(dispose: Unit) :LifecycleObserver{
-    private val dispose = dispose
+class NetLifeObserver<T>(private val disObserver: DisposableObserver<T>, private val lifecycle:Lifecycle) : LifecycleObserver {
+
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_PAUSE)
+    fun pause() {
+        ldd("页面暂停 ====")
+    }
     @OnLifecycleEvent(value = Lifecycle.Event.ON_DESTROY)
     fun disConnect(){
-        lee("页面关闭，断开连接")
-        dispose
+        lee("页面关闭，断开连接=====")
+        //取消监听
+        lifecycle.removeObserver(this)
+        disObserver.dispose()
     }
+
+
+
 }
 
 

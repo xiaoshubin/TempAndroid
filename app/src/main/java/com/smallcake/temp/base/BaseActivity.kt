@@ -1,5 +1,6 @@
 package com.smallcake.temp.base
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lxj.xpopup.impl.LoadingPopupView
@@ -13,10 +14,10 @@ import org.koin.core.parameter.parametersOf
 /**
  * Activity基类
  */
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
-    protected val dataProvider: DataProvider = get()
-    protected val dialog:LoadingPopupView by inject{parametersOf(this)}
+    protected val dataProvider: DataProvider = get()//注入数据提供者
+    protected val dialog: LoadingPopupView by inject { parametersOf(this) }//注入单例加载圈
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +25,13 @@ abstract class BaseActivity: AppCompatActivity() {
 
 
     }
+
     override fun onDestroy() {
         super.onDestroy()
         removeActivity(this)
     }
+    //去其他页面，不传参
+    fun goActivity(clz: Class<*>) = startActivity(Intent(this, clz))
 
 
 }

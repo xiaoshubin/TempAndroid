@@ -1,6 +1,5 @@
 package com.smallcake.temp
 
-import android.content.Intent
 import android.os.Bundle
 import com.smallcake.temp.base.BaseBindActivity
 import com.smallcake.temp.databinding.ActivityMainBinding
@@ -17,7 +16,7 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     private fun onEvent() {
 
         bind.btnGet2.setOnClickListener{
-            startActivity(Intent(this,TestActivity::class.java))
+            goActivity(TestActivity::class.java)
         }
 
     }
