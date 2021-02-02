@@ -1,9 +1,9 @@
 package com.smallcake.temp
 
+import android.content.Intent
 import android.os.Bundle
 import com.smallcake.temp.base.BaseBindActivity
 import com.smallcake.temp.databinding.ActivityMainBinding
-import com.smallcake.temp.http.sub
 import com.smallcake.temp.utils.BottomNavUtils
 
 
@@ -15,17 +15,9 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     }
 
     private fun onEvent() {
-        bind.btnGet1.setOnClickListener{
-            dataProvider.weather.query()
-            .sub({
-                bind.tvMsg.text = it.result.toString()
-            },dialog = dialog)
-        }
+
         bind.btnGet2.setOnClickListener{
-            dataProvider.mobile.mobileGet("13800138000")
-                .sub({
-                    bind.tvMsg.text = it.result.toString()
-                },dialog = dialog)
+            startActivity(Intent(this,TestActivity::class.java))
         }
 
     }

@@ -26,14 +26,6 @@ val appModule = module {
     //单例，加载圈圈
     single { (context:Context) -> XPopup.Builder(context).asLoading().setTitle("加载中...") }
     //单例，retrofit
-//    single {
-//         Retrofit.Builder()
-//            .baseUrl(Constant.BASE_URL)
-//            .client(okHttpClient)
-//            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
     single (named("hasUrl")){ (url:String?)->
          Retrofit.Builder()
             .baseUrl(url?: Constant.BASE_URL)
