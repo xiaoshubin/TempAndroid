@@ -118,6 +118,8 @@ dependencies {
     //Apollo的核心库,事件通知
     implementation 'com.github.lsxiao.Apollo:core:1.0.2'
     kapt "com.github.lsxiao.Apollo:processor:1.0.2"//kotlin版本的
+    //RecyclerView适配器
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
 
     /**
      * ------------------------------------------下面为一些常用可选的第三方库---------------------------------------------------

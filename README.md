@@ -41,6 +41,7 @@ keystore.alias_password = 123456
 
 | 库Github                                                     | 说明                                                         |
 | :----------------------------------------------------------- | ------------------------------------------------------------ |
+| [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper) | 强大而灵活的RecyclerView Adapter                             |
 | [retrofit](https://github.com/square/retrofit)（[converter-gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson/src/main/java/retrofit2/converter/gson)，[RxJava2 Adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2)），[okhttp](https://github.com/square/okhttp)（[logging-interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)），[gson](https://github.com/google/gson) | 网络                                                         |
 | [RxJava](https://github.com/ReactiveX/RxJava)                | Rxjava2，官方已经发布3.0.10了,使用参考[RxJava2-Android-Samples](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples) |
 | [XPopup](https://github.com/li-xiaojun/XPopup)               | 非常好用的Pop弹框                                            |
