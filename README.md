@@ -37,16 +37,34 @@ keystore.alias_password = 123456
 
 # 三方库
 
-1. [banner](https://github.com/youth5201314/banner)：轮播图
-2. [logger](https://github.com/orhanobut/logger)：日志
-3.  [glide](https://github.com/bumptech/glide)：图片加载
-4. [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx)：viewBinding扩展库
-5. [leakcanary](https://github.com/square/leakcanary)：检测内存泄漏
-6. [XXPermissions](https://github.com/getActivity/XXPermissions)：权限管理
-7. [koin](https://github.com/InsertKoinIO/koin)：依赖注入
-8. [retrofit](https://github.com/square/retrofit)，[converter-gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson/src/main/java/retrofit2/converter/gson)，[RxJava2 Adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2)，[okhttp](https://github.com/square/okhttp)，[gson](https://github.com/google/gson)：网络
-9. [RxJava](https://github.com/ReactiveX/RxJava)：Rxjava2，限制官方已经发布3.0.9了,使用参考[RxJava2-Android-Samples](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples)
-10. [XPopup](https://github.com/li-xiaojun/XPopup)：非常好用的Pop弹框
+常用的第三方库
+
+| 库Github                                                     | 说明                                                         |
+| :----------------------------------------------------------- | ------------------------------------------------------------ |
+| [retrofit](https://github.com/square/retrofit)（[converter-gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson/src/main/java/retrofit2/converter/gson)，[RxJava2 Adapter](https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava2)），[okhttp](https://github.com/square/okhttp)（[logging-interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)），[gson](https://github.com/google/gson) | 网络                                                         |
+| [RxJava](https://github.com/ReactiveX/RxJava)                | Rxjava2，官方已经发布3.0.10了,使用参考[RxJava2-Android-Samples](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples) |
+| [XPopup](https://github.com/li-xiaojun/XPopup)               | 非常好用的Pop弹框                                            |
+| [banner](https://github.com/youth5201314/banner)             | 轮播图                                                       |
+| [logger](https://github.com/orhanobut/logger)                | 日志                                                         |
+| [glide](https://github.com/bumptech/glide)                   | 图片加载                                                     |
+| [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx) | viewBinding扩展库                                            |
+| [leakcanary](https://github.com/square/leakcanary)           | 检测内存泄漏                                                 |
+| [XXPermissions](https://github.com/getActivity/XXPermissions) | 权限管理                                                     |
+| [koin](https://github.com/InsertKoinIO/koin)                 | 依赖注入                                                     |
+| [RxLifecycle](https://github.com/trello/RxLifecycle)         | 生命周期绑定，让应用更稳定                                   |
+| [Apollo](https://github.com/Sloaix/Apollo)                   | 事件通知，替代EventBus                                       |
+
+可选的第三方库
+
+| 库Github                                                     | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [ImmersionBar](https://github.com/gyf-dev/ImmersionBar)      | 沉浸式实现（可选）                                           |
+| [Luban](https://github.com/Curzibn/Luban)                    | 鲁班压缩，压缩图片（可选）                                   |
+| [CalendarView](https://github.com/huanghaibin-dev/CalendarView) | 日历（可选）                                                 |
+| [PictureSelector](https://github.com/LuckSiege/PictureSelector) | 多媒体选择器（可选）                                         |
+| [EasyFloat](https://github.com/princekin-f/EasyFloat)        | 悬浮球（可选）                                               |
+| [ProgressManager](https://github.com/JessYanCoding/ProgressManager) | 图片加载进度，下载进度监听（可选）                           |
+| [zxing](https://github.com/zxing/zxing)                      | 二维码生成与扫描（可选），引入地址:`implementation 'com.google.zxing:core:3.3.3'`和`implementation 'com.journeyapps:zxing-android-embedded:3.6.0'`，其中在`utils`中创建了`ZxingUtils`一个工具类，如果不使用zxing记得删除此工具类`ZxingUtils` |
 
 
 

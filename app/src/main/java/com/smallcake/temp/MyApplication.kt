@@ -3,10 +3,11 @@ package com.smallcake.temp
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.lsxiao.apollo.core.Apollo
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.smallcake.temp.module.appModule
-import okhttp3.OkHttpClient
+import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -28,12 +29,7 @@ class MyApplication : Application() {
             androidContext(this@MyApplication)
             modules(appModule)
         }
-        initHttp()
-    }
-    fun initHttp(){
-        val okHttpClient:OkHttpClient =  OkHttpClient.Builder().build()
-
-
+        Apollo.init(AndroidSchedulers.mainThread(), this);
     }
 
 

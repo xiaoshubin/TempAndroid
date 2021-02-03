@@ -8,6 +8,7 @@ import com.smallcake.temp.api.impl.MobileImpl
 import com.smallcake.temp.api.impl.WeatherImpl
 import com.smallcake.temp.base.Constant
 import com.smallcake.temp.http.DataProvider
+import com.smallcake.temp.utils.ldd
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -24,7 +25,11 @@ var gson: Gson? = GsonBuilder()
     .setDateFormat("yyyy-MM-dd HH:mm:ss")
     .serializeNulls()
     .create()
-val loggingInterceptor:HttpLoggingInterceptor =  HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+val loggingInterceptor:HttpLoggingInterceptor =  HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
+    override fun log(message: String) {
+        ldd(message)
+    }
+}).setLevel(HttpLoggingInterceptor.Level.BASIC)
 var okHttpClient: OkHttpClient = OkHttpClient.Builder()
     .addInterceptor(loggingInterceptor)
     .build()
