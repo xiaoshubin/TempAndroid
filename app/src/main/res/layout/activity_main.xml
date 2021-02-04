@@ -1,141 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"/>
-
-    <Button
-        android:textSize="60sp"
-        android:gravity="center"
-        android:text="去Test"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:id="@+id/btn_get2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-    <View style="@style/h_line"/>
+    <data>
+        <variable
+            name="item"
+            type="com.smallcake.temp.bean.WeatherResponse" />
+    </data>
 
     <LinearLayout
-        android:id="@+id/tab_layout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_56"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100" />
+
+        <Button
+            android:textSize="60sp"
+            android:gravity="center"
+            android:text="去Test"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:id="@+id/btn_get2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@{item.component1().toString()}"
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/h_line" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:layout_centerInParent="true"
-                android:src="@mipmap/icon_selected_tab1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_tab1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_6"
-                android:text="首页"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_12" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:id="@+id/iv_tab4"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/icon_unselected_tab2" />
+                    android:src="@mipmap/icon_selected_tab1" />
+
                 <TextView
-                    tools:visibility="visible"
-                    android:visibility="visible"
-                    android:id="@+id/tv_message_num"
-                    android:layout_marginLeft="-8dp"
-                    android:gravity="center"
-                    android:layout_toRightOf="@+id/iv_tab4"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/pot_red"
-                    android:textColor="@color/white"
-                    android:layout_width="@dimen/dp_14"
-                    android:layout_height="@dimen/dp_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_tab1"
                     android:layout_centerHorizontal="true"
-                    android:text="9"
-                    android:textSize="@dimen/sp_10" />
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="首页"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
 
-            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:id="@+id/iv_tab4"
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_unselected_tab2" />
+
+                    <TextView
+                        tools:visibility="visible"
+                        android:visibility="visible"
+                        android:id="@+id/tv_message_num"
+                        android:layout_marginLeft="-8dp"
+                        android:gravity="center"
+                        android:layout_toRightOf="@+id/iv_tab4"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/pot_red"
+                        android:textColor="@color/white"
+                        android:layout_width="@dimen/dp_14"
+                        android:layout_height="@dimen/dp_14"
+                        android:layout_centerHorizontal="true"
+                        android:text="9"
+                        android:textSize="@dimen/sp_10" />
+
+                </RelativeLayout>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:text="列表"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/sp_12" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="列表"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:layout_marginTop="2dp"
-                android:src="@mipmap/icon_unselected_tab3" />
+                <ImageView
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginTop="2dp"
+                    android:src="@mipmap/icon_unselected_tab3" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:text="我的"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/sp_12" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="我的"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

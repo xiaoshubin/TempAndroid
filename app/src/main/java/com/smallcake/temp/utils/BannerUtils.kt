@@ -28,7 +28,6 @@ object BannerUtils{
         banner.adapter = ImgBannerAdapter(datas)
         banner.addBannerLifecycleObserver(context)
         banner.indicator = CircleIndicator(context)
-
     }
 }
 

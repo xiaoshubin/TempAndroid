@@ -47,7 +47,7 @@ fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> 
  * @param owner LifecycleOwner
  * @return io.reactivex.Observable<T>
  */
-fun <T> Observable<T>.bindActivity(provider: LifecycleProvider<Lifecycle.Event>): Observable<T> {
+fun <T> Observable<T>.bindLife(provider: LifecycleProvider<Lifecycle.Event>): Observable<T> {
     ldd("绑定生命周期===========${provider.hashCode()}")
     return bindUntilEvent(provider,Lifecycle.Event.ON_DESTROY)
 }

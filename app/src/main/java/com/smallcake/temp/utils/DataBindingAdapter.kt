@@ -21,7 +21,8 @@ import java.security.MessageDigest
 /**
  * Date: 2020/1/15
  * author: SmallCake
- * 使用：直接在layout包裹的xml中的ImageView控件中url = "@{item.img_path}"
+ * 注意使用条件：需要在在layout包裹的xml中使用
+ * ImageView控件中url = "@{item.img_path}"
  */
 object DataBindingAdapter {
     //普通网络图片

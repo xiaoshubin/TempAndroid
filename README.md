@@ -4,7 +4,7 @@
 
 使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项10，工具20
 
-# 配置
+# 配置项
 
 1. 配置签名：`signingConfigs`需要你在本地的配置文件`local.properties`中设置打包密钥配置【需自行添加如下】，不然项目构建会报错,这样不管打正式包和debug包，都是一种签名文件，不会出现签名不同包名相同的错误，方便调试。
 
@@ -21,17 +21,17 @@ keystore.alias_password = 123456
 
 4. 配置Uri：`filepath_data.xml`,Anroid7+获取文件要以FileProvider的方式获取文件Uri
 
-5. 配置方法：配置MultiDex（也就是总方法数超过限制>65536）支持
+5. 配置多方法：配置MultiDex（也就是总方法数超过限制>65536）支持
 
 6. 配置打包：自定义了打包文件名称，以（包名的.后一段+时间+v版本名称+打包方式.apk）来命名
 
-7. 配置dataBinding：开启了dataBinding的支持
+7. 配置dataBinding：开启了dataBinding的支持，配合`DataBindingAdapter`工具，xml数据一键搞定
 
-8. 配置ViewBinding：获取布局上的控件，避免空指针异常，和dataBinding搭配快速构建MVVM
+8. 配置ViewBinding：获取布局上的控件，空安全，快速构建MVVM
 
-9. 配置了kapt：kapt插件，以支持dataBinding和第三方注释类
+9. 配置了kapt：kapt插件，以支持dataBinding和第三方注释引入
 
-10. 配置屏幕适配：使用[ScreenMatch](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fwildma%2FScreenAdaptation%2Fraw%2Fmaster%2FScreenMatch.jar)插件，具体使用参考：[一种非常好用的Android屏幕适配](https://www.jianshu.com/p/1302ad5a4b04)
+10. 配置屏幕适配：使用[ScreenMatch](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fwildma%2FScreenAdaptation%2Fraw%2Fmaster%2FScreenMatch.jar)插件生成多个尺寸，具体使用参考：[一种非常好用的Android屏幕适配](https://www.jianshu.com/p/1302ad5a4b04)
 
     
 
@@ -66,12 +66,13 @@ keystore.alias_password = 123456
 | [EasyFloat](https://github.com/princekin-f/EasyFloat)        | 悬浮球（可选）                                               |
 | [ProgressManager](https://github.com/JessYanCoding/ProgressManager) | 图片加载进度，下载进度监听（可选）                           |
 | [zxing](https://github.com/zxing/zxing)                      | 二维码生成与扫描（可选），引入地址:`implementation 'com.google.zxing:core:3.3.3'`和`implementation 'com.journeyapps:zxing-android-embedded:3.6.0'`，其中在`utils`中创建了`ZxingUtils`一个工具类，如果不使用zxing记得删除此工具类`ZxingUtils` |
+| [Toasty](https://github.com/GrenderG/Toasty)                 | 让Toast不再单调                                              |
 
 
 
 
 
-# 我的工具
+# 工具类
 
 1. `ActivityCollector.kt`：管理Activity
 
@@ -115,5 +116,59 @@ keystore.alias_password = 123456
 
     
 
+# 示例介绍
 
+##### 1.如何请求一个网络数据？
+
+```kotlin
+dataProvider//数据提供者
+     .weather//那个栏目的数据
+     .query()//此栏目查询方法
+     .bindLife(provider)//绑定生命周期
+     .sub({bind.item = it.result})//只关心请求成功结果
+    
+```
+
+去掉注释,正规写法,3行一个请求
+
+```
+dataProvider.weather.query()
+    .bindLife(provider)
+    .sub({bind.item = it.result})
+```
+
+1.1加入加载圈？
+
+```
+dataProvider.weather.query()
+    .bindLife(provider)
+    .sub({bind.item = it.result},dialog = dialog)
+```
+
+1.2自己处理失败结果?
+
+```
+ dataProvider.weather.query()
+     .bindLife(provider)
+     .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
+```
+
+
+
+##### 2.如何在B页面刷新A页面？
+
+首先在B页面写`Apollo.emit("event")`，这样就发出了一个通知
+
+然后在A页面写如下代码，这样就接受到B页面发的通知
+
+```
+    @Receive("event")
+    fun event()=print("刷新")
+```
+
+##### 3.如何让底部导航栏与页面ViewPager联动?
+
+```
+ BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
+```
 
