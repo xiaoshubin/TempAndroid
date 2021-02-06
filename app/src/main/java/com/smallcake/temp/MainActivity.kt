@@ -14,9 +14,7 @@ import es.dmoral.toasty.Toasty
 class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        initView()
-        onEvent()
+        bind.textView.text = "Hello World!"
     }
 
 

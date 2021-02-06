@@ -115,6 +115,36 @@ keystore.alias_password = 123456
 20. `DataBindingAdapter`：dataBinding控件xml属性扩展
 
     
+    
+    
+# 基类
+
+1.BaseActivity：继承AppCompatActivity的基类页面
+
+- 1.1 注入了数据提供者DataProvider
+- 1.2 注入单例加载圈LoadingPopupView
+- 1.3 创建生命周期提供者LifecycleProvider
+- 1.4 创建了事件通知者ApolloBinder
+- 1.5 在对应的生命周期中对页面进行管理：addActivity和removeActivity
+- 1.6 简化跳页面不传参方法goActivity
+
+2.BaseBindActivity：继承BaseActivity，加入了ViewBinding的泛型引入
+
+- 子类泛型名称极为，布局的驼峰命名+Binding即可，例如首页布局文件为activity_main.xml，那么泛型为ActivityMainBinding
+
+  ```kotlin
+  class MainActivity : BaseBindActivity<ActivityMainBinding>() {
+      override fun onCreate(savedInstanceState: Bundle?) {
+          super.onCreate(savedInstanceState)
+          bind.textView.text = "Hello World!"  
+      }
+  }
+  ```
+
+  
+
+3.BaseBindFragment：继承androidx.fragment.app.Fragment，加入了ViewBinding的泛型引入，类似BaseBindActivity
+
 
 # 示例介绍
 
@@ -122,16 +152,16 @@ keystore.alias_password = 123456
 
 ```kotlin
 dataProvider//数据提供者
-     .weather//那个栏目的数据
-     .query()//此栏目查询方法
-     .bindLife(provider)//绑定生命周期
-     .sub({bind.item = it.result})//只关心请求成功结果
+    .weather//那个栏目的数据
+    .query()//此栏目查询方法
+    .bindLife(provider)//绑定生命周期
+    .sub({bind.item = it.result})//只关心请求成功结果
     
 ```
 
 去掉注释,正规写法,3行一个请求
 
-```
+```kotlin
 dataProvider.weather.query()
     .bindLife(provider)
     .sub({bind.item = it.result})
@@ -139,7 +169,7 @@ dataProvider.weather.query()
 
 1.1加入加载圈？
 
-```
+```kotlin
 dataProvider.weather.query()
     .bindLife(provider)
     .sub({bind.item = it.result},dialog = dialog)
@@ -147,10 +177,10 @@ dataProvider.weather.query()
 
 1.2自己处理失败结果?
 
-```
- dataProvider.weather.query()
-     .bindLife(provider)
-     .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
+```kotlin
+dataProvider.weather.query()
+    .bindLife(provider)
+    .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
 ```
 
 
@@ -161,14 +191,14 @@ dataProvider.weather.query()
 
 然后在A页面写如下代码，这样就接受到B页面发的通知
 
-```
-    @Receive("event")
-    fun event()=print("刷新")
+```kotlin
+@Receive("event")
+fun event()=print("刷新")
 ```
 
 ##### 3.如何让底部导航栏与页面ViewPager联动?
 
-```
- BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
+```kotlin
+BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
 ```
 
