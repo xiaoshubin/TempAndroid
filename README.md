@@ -2,7 +2,7 @@
 
 
 
-使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项10，工具20
+使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项11，工具20
 
 # 配置项
 
@@ -33,6 +33,8 @@ keystore.alias_password = 123456
 
 10. 配置屏幕适配：使用[ScreenMatch](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fwildma%2FScreenAdaptation%2Fraw%2Fmaster%2FScreenMatch.jar)插件生成多个尺寸，具体使用参考：[一种非常好用的Android屏幕适配](https://www.jianshu.com/p/1302ad5a4b04)
 
+11. 配置了Parcelable:Parcelable插件，序列化只需要一个注释@Parcelize
+
     
 
 # 三方库
@@ -54,6 +56,7 @@ keystore.alias_password = 123456
 | [koin](https://github.com/InsertKoinIO/koin)                 | 依赖注入                                                     |
 | [RxLifecycle](https://github.com/trello/RxLifecycle)         | 生命周期绑定，让应用更稳定                                   |
 | [Apollo](https://github.com/Sloaix/Apollo)                   | 事件通知，替代EventBus                                       |
+| [MMKV](https://github.com/Tencent/MMKV)                      | 用于替代SharedPreferences，性能更优，还可以通过importFromSharedPreferences() 函数，迁移SharedPreferences已有数据 |
 
 可选的第三方库
 

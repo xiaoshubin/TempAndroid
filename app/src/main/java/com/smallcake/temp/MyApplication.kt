@@ -7,6 +7,7 @@ import com.lsxiao.apollo.core.Apollo
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.smallcake.temp.module.appModule
+import com.tencent.mmkv.MMKV
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.core.context.startKoin
 
@@ -23,11 +24,16 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        //日志打印
         Logger.addLogAdapter(AndroidLogAdapter())
+        //模块注入
         startKoin{
             modules(appModule)
         }
-        Apollo.init(AndroidSchedulers.mainThread(), this);
+        //事件通知
+        Apollo.init(AndroidSchedulers.mainThread(), this)
+        //数据存储
+        MMKV.initialize(this)
     }
 
 
