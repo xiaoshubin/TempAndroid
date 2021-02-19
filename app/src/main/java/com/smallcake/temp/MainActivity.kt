@@ -10,7 +10,6 @@ import com.smallcake.temp.databinding.ActivityMainBinding
 import com.smallcake.temp.http.bindLife
 import com.smallcake.temp.http.sub
 import com.smallcake.temp.utils.BottomNavUtils
-import com.smallcake.temp.utils.ldd
 import com.tencent.mmkv.MMKV
 
 
@@ -29,7 +28,11 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
             bind.textView.text = decodeParcelable.toString()
 
         },3000)
+
+
     }
+
+
 
 
     private fun onEvent() {
@@ -37,10 +40,12 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     }
 
     fun queryWeather(){
-        dataProvider.weather.query()
+//        dataProvider.weather.query()
+//            .bindLife(provider)
+//            .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
+        dataProvider.mobile.mobileGet("18324138218")
             .bindLife(provider)
-            .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
-
+            .sub({ })
 
     }
 
