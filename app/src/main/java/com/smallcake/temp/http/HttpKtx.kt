@@ -2,6 +2,7 @@ package com.smallcake.temp.http
 
 import androidx.lifecycle.Lifecycle
 import com.lxj.xpopup.impl.LoadingPopupView
+import com.orhanobut.logger.Logger
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.Observable
@@ -9,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * 对于线程切换的扩展
+ * 对于线程切换的扩展,从io线程请求，回到主线程接收结果
  * @receiver Observable<T>
  * @return Observable<T>
  */
@@ -47,7 +48,7 @@ fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> 
  * @return io.reactivex.Observable<T>
  */
 fun <T> Observable<T>.bindLife(provider: LifecycleProvider<Lifecycle.Event>): Observable<T> {
-//    ldd("绑定生命周期===========${provider.hashCode()}")
+    Logger.d("┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
     return bindUntilEvent(provider,Lifecycle.Event.ON_DESTROY)
 }
 

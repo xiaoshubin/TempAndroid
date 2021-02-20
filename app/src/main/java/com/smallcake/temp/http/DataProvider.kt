@@ -11,4 +11,5 @@ import org.koin.core.component.get
 class DataProvider :KoinComponent {
     val weather: WeatherImpl = get()
     val mobile: MobileImpl = get()
+
 }

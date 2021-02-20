@@ -7,6 +7,9 @@
         <variable
             name="item"
             type="com.smallcake.temp.bean.WeatherResponse" />
+        <variable
+            name="user"
+            type="com.smallcake.temp.bean.UserBean" />
     </data>
 
     <LinearLayout
@@ -15,6 +18,7 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
         <TextView
+            android:text="@{user.name}"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

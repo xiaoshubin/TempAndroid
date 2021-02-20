@@ -13,8 +13,8 @@ import org.koin.core.qualifier.named
 import retrofit2.Retrofit
 
 class MobileImpl :MobileApi , KoinComponent {
-    private val retrofit2 = get<Retrofit>(named("hasUrl")){parametersOf(Constant.BASE_PHONE_URL)}
-    private val api: MobileApi = retrofit2.create(MobileApi::class.java)
+    private val retrofit = get<Retrofit>(named("hasUrl")){parametersOf(Constant.BASE_PHONE_URL)}
+    private val api: MobileApi = retrofit.create(MobileApi::class.java)
     override fun mobileGet(mobile: String, key: String): Observable<BaseResponse<PhoneRespone>>
         = api.mobileGet(mobile).im()
 

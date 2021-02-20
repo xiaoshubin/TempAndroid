@@ -1,8 +1,6 @@
 package com.smallcake.temp
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import com.lsxiao.apollo.core.annotations.Receive
 import com.smallcake.temp.base.BaseBindActivity
 import com.smallcake.temp.bean.UserBean
@@ -10,25 +8,16 @@ import com.smallcake.temp.databinding.ActivityMainBinding
 import com.smallcake.temp.http.bindLife
 import com.smallcake.temp.http.sub
 import com.smallcake.temp.utils.BottomNavUtils
-import com.tencent.mmkv.MMKV
+import com.smallcake.temp.utils.ldd
 
 
 class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind.textView.text = "Hello World!"
 
+        bind.user = UserBean("Smallcake",8)
         initView()
         onEvent()
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
-            val kv = MMKV.defaultMMKV()
-            val user = UserBean("SmallCake",8)
-            kv?.encode("user",user)
-            val decodeParcelable = kv?.decodeParcelable("user", UserBean::class.java)
-            bind.textView.text = decodeParcelable.toString()
-
-        },3000)
-
 
     }
 
@@ -36,18 +25,18 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
 
 
     private fun onEvent() {
-        bind.btnGet2.setOnClickListener{queryWeather()}
+        bind.btnGet2.setOnClickListener{
+//            queryWeather()
+            goActivity(TestActivity::class.java)
+        }
     }
 
     fun queryWeather(){
-//        dataProvider.weather.query()
-//            .bindLife(provider)
-//            .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
-        dataProvider.mobile.mobileGet("18324138218")
+        dataProvider.weather.query()
             .bindLife(provider)
-            .sub({ })
-
+            .sub({bind.item = it.result},dialog = dialog,fail = { ldd("网络有问题")})
     }
+
 
 
     private fun initView() {
@@ -56,7 +45,7 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
     }
 
     @Receive("event")
-    fun event()=print("有消息来袭")
+    fun event()= ldd("有消息来袭")
 
 
 

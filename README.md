@@ -117,23 +117,25 @@ keystore.alias_password = 123456
 
 20. `DataBindingAdapter`：dataBinding控件xml属性扩展
 
+21. `ZxingUtils`：二维码生成
+
     
-    
+
     
 # 基类
 
 1.BaseActivity：继承AppCompatActivity的基类页面
 
-- 1.1 注入了数据提供者DataProvider
-- 1.2 注入单例加载圈LoadingPopupView
-- 1.3 创建生命周期提供者LifecycleProvider
-- 1.4 创建了事件通知者ApolloBinder
-- 1.5 在对应的生命周期中对页面进行管理：addActivity和removeActivity
-- 1.6 简化跳页面不传参方法goActivity
+- 1.1 注入了数据提供者DataProvider（各类网络接口）
+- 1.2 注入单例加载圈LoadingPopupView（页面加载进度显示）
+- 1.3 创建生命周期提供者LifecycleProvider（生命周期绑定）
+- 1.4 创建了事件通知者ApolloBinder（事件通知）
+- 1.5 在对应的生命周期中对页面进行管理：addActivity和removeActivity（页面管理）
+- 1.6 简化跳页面不传参方法goActivity（页面跳转）
 
 2.BaseBindActivity：继承BaseActivity，加入了ViewBinding的泛型引入
 
-- 子类泛型名称极为，布局的驼峰命名+Binding即可，例如首页布局文件为activity_main.xml，那么泛型为ActivityMainBinding
+- 子类泛型名称为：布局的驼峰命名+Binding，例如首页布局文件为activity_main.xml，那么泛型实例为ActivityMainBinding，这样就可以直接使用bind.控件了，省略了大量findViewById。同时可以结合DataBind直接绑定对象
 
   ```kotlin
   class MainActivity : BaseBindActivity<ActivityMainBinding>() {
@@ -144,7 +146,6 @@ keystore.alias_password = 123456
   }
   ```
 
-  
 
 3.BaseBindFragment：继承androidx.fragment.app.Fragment，加入了ViewBinding的泛型引入，类似BaseBindActivity
 
@@ -190,9 +191,9 @@ dataProvider.weather.query()
 
 ##### 2.如何在B页面刷新A页面？
 
-首先在B页面写`Apollo.emit("event")`，这样就发出了一个通知
+- 首先在B页面写`Apollo.emit("event")`，这样就发出了一个通知
 
-然后在A页面写如下代码，这样就接受到B页面发的通知
+- 然后在A页面写如下代码，这样就接受到B页面发的通知
 
 ```kotlin
 @Receive("event")
@@ -204,4 +205,136 @@ fun event()=print("刷新")
 ```kotlin
 BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
 ```
+
+##### 4.如何数据绑定对象?
+
+- 首先页面都继承BaseBindActivity，然后布局中layout标签包裹根布局。
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <layout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+      <data> 
+          <variable
+              name="user"
+              type="com.smallcake.temp.bean.UserBean" />
+      </data>
+      <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:context=".MainActivity">
+          <TextView
+          	android:text="@{user.name}"
+              android:id="@+id/textView"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" />
+      </LinearLayout>
+  </layout>
+  ```
+
+- 然后页面中使用
+
+  ```kotlin
+  bind.user = UserBean("Smallcake",8)
+  ```
+
+  
+
+​	
+
+##### 5 如何添加公共头部
+
+- 在网络注入模块（HttpModule）位置,创建的okHttpClientBuilder后面加入你自己的头部信息
+
+```
+    //公共头部拦截器
+    val haveHeader = true
+    if (haveHeader)okHttpClientBuilder.addInterceptor(Interceptor{
+        val request: Request = it.request()
+            .newBuilder()
+            .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+            .addHeader("Accept-Encoding", "gzip, deflate")
+            .addHeader("Connection", "keep-alive")
+            .addHeader("Accept", "*/*")
+            .addHeader("Cookie", "add cookies here")
+            .build()
+         it.proceed(request)
+    })
+```
+
+##### 6 如何添加一个新的网络请求分类（推荐按路径功能分类）
+
+- 比如我们要创建一个站点分类
+
+1.首先创建一个接口
+
+```kotlin
+interface SiteApi {
+    //平台联系电话
+    @GET("site/plat-phone")
+    fun platPhone(): Observable<BaseResponse<PlatPhoneResponse>>
+}
+```
+
+2.实现接口
+
+```kotlin
+class SiteImpl:SiteApi , KoinComponent {
+    private val retrofit by inject()
+    private val api: SiteApi = retrofit.create(SiteApi::class.java)
+    override fun platPhone(): Observable<BaseResponse<PlatPhoneResponse>> =api.platPhone().im()
+}
+```
+
+3.在HttpModule模块中添加单例注入
+
+```kotlin
+/**
+ * 依赖注入module
+ */
+val appModule = module {
+	...
+    //网络数据提供者
+    single {DataProvider()}
+    single {SiteImpl()}
+
+}
+```
+
+4.最后在DataProvider中注入此接口实现类
+
+```kotlin
+/**
+ * 网络数据提供者
+ */
+class DataProvider :KoinComponent {
+    val site: SiteImpl = get()
+}
+```
+
+注意：注入多个不同主机地址域名，需要设置注入时不同的name
+
+```kotlin
+    //单例retrofit,需要单独定义主机地址
+    single (named("hasUrl")){ (url:String?)->
+        Retrofit.Builder()
+            .baseUrl(url?: Constant.BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+    }
+    single (named("siteUrl")){ (url:String?)->
+        Retrofit.Builder()
+            .baseUrl(url?: Constant.BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())// 支持RxJava2
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+    }
+```
+
+
 
