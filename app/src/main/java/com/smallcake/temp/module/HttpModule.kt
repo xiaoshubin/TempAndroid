@@ -4,6 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.lxj.xpopup.XPopup
+import com.smallcake.temp.api.MobileApi
+import com.smallcake.temp.api.WeatherApi
 import com.smallcake.temp.api.impl.MobileImpl
 import com.smallcake.temp.api.impl.WeatherImpl
 import com.smallcake.temp.base.Constant
@@ -12,6 +14,7 @@ import com.smallcake.temp.http.HttpLogInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -78,6 +81,8 @@ val httpModule = module {
     single {DataProvider()}
     single {WeatherImpl()}
     single {MobileImpl()}
+    single {get<Retrofit>().create(WeatherApi::class.java)}
+    single {get<Retrofit>(named("hasUrl")){parametersOf(Constant.BASE_PHONE_URL)}.create(MobileApi::class.java)}
 
 }
 

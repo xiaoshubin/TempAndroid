@@ -26,8 +26,8 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
 
     private fun onEvent() {
         bind.btnGet2.setOnClickListener{
-//            queryWeather()
-            goActivity(TestActivity::class.java)
+            queryWeather()
+//            goActivity(TestActivity::class.java)
         }
     }
 

@@ -282,8 +282,7 @@ interface SiteApi {
 
 ```kotlin
 class SiteImpl:SiteApi , KoinComponent {
-    private val retrofit by inject()
-    private val api: SiteApi = retrofit.create(SiteApi::class.java)
+    private val api: SiteApi by inject()
     override fun platPhone(): Observable<BaseResponse<PlatPhoneResponse>> =api.platPhone().im()
 }
 ```
@@ -299,7 +298,7 @@ val appModule = module {
     //网络数据提供者
     single {DataProvider()}
     single {SiteImpl()}
-
+    single {get<Retrofit>().create(SiteApi::class.java)}
 }
 ```
 
@@ -314,7 +313,7 @@ class DataProvider :KoinComponent {
 }
 ```
 
-注意：注入多个不同主机地址域名，需要设置注入时不同的name
+注意：注入多个不同主机地址域名，需要设置注入时写入不同的name
 
 ```kotlin
     //单例retrofit,需要单独定义主机地址
