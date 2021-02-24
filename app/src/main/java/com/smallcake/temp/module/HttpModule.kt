@@ -5,9 +5,9 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.lxj.xpopup.XPopup
 import com.smallcake.temp.api.MobileApi
+import com.smallcake.temp.api.MobileImpl
 import com.smallcake.temp.api.WeatherApi
-import com.smallcake.temp.api.impl.MobileImpl
-import com.smallcake.temp.api.impl.WeatherImpl
+import com.smallcake.temp.api.WeatherImpl
 import com.smallcake.temp.base.Constant
 import com.smallcake.temp.http.DataProvider
 import com.smallcake.temp.http.HttpLogInterceptor
@@ -79,8 +79,8 @@ val httpModule = module {
     }
     //网络数据提供者
     single {DataProvider()}
-    single {WeatherImpl()}
-    single {MobileImpl()}
+    single { WeatherImpl() }
+    single { MobileImpl() }
     single {get<Retrofit>().create(WeatherApi::class.java)}
     single {get<Retrofit>(named("hasUrl")){parametersOf(Constant.BASE_PHONE_URL)}.create(MobileApi::class.java)}
 

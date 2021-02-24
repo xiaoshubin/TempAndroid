@@ -266,9 +266,9 @@ BottomNavUtils.tabBindViewPager(this,bind.tabLayout,bind.viewPager)
 
 ##### 6 如何添加一个新的网络请求分类（推荐按路径功能分类）
 
-- 比如我们要创建一个站点分类
+- 比如我们要创建一个站点分类Api
 
-1.首先创建一个接口
+1.首先创建一个接口，并实现此接口，kotlin可以把多个文件放一起，方便管理
 
 ```kotlin
 interface SiteApi {
@@ -276,18 +276,13 @@ interface SiteApi {
     @GET("site/plat-phone")
     fun platPhone(): Observable<BaseResponse<PlatPhoneResponse>>
 }
-```
-
-2.实现接口
-
-```kotlin
 class SiteImpl:SiteApi , KoinComponent {
     private val api: SiteApi by inject()
     override fun platPhone(): Observable<BaseResponse<PlatPhoneResponse>> =api.platPhone().im()
 }
 ```
 
-3.在HttpModule模块中添加单例注入
+2.在HttpModule模块中添加单例注入
 
 ```kotlin
 /**
@@ -302,7 +297,7 @@ val appModule = module {
 }
 ```
 
-4.最后在DataProvider中注入此接口实现类
+3.最后在DataProvider中注入此接口实现类
 
 ```kotlin
 /**
