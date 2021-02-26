@@ -8,8 +8,7 @@ import com.lsxiao.apollo.core.Apollo
 import com.lsxiao.apollo.core.contract.ApolloBinder
 import com.lxj.xpopup.impl.LoadingPopupView
 import com.smallcake.temp.http.DataProvider
-import com.smallcake.temp.utils.addActivity
-import com.smallcake.temp.utils.removeActivity
+import com.smallcake.temp.utils.ActivityCollector
 import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import com.trello.rxlifecycle2.LifecycleProvider
 import org.koin.android.ext.android.get
@@ -27,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity() {
     private var mBinder: ApolloBinder? = null//事件通知者
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addActivity(this)
+        ActivityCollector.addActivity(this)
         mBinder = Apollo.bind(this)
         provider = AndroidLifecycle.createLifecycleProvider(this)
 
@@ -35,7 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        removeActivity(this)
+        ActivityCollector.removeActivity(this)
         mBinder?.unbind()
     }
     //去其他页面，不传参

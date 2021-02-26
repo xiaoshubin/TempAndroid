@@ -16,6 +16,7 @@ import com.smallcake.temp.MyApplication
 /**
  * Date: 2019/11/20
  * author: SmallCake
+ * 多媒体文本工具类
  */
 class SpannableStringUtils private constructor() {
     class Builder(private var text: CharSequence) {

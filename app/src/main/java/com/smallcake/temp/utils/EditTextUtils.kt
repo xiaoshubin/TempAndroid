@@ -8,6 +8,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import java.util.regex.Pattern
 
+/**
+ * EditText工具类
+ */
 object EditTextUtils {
     /**
      * 验证多个输入栏未输入，提示为：（"请填写" + 你xml设置的Hint字段）

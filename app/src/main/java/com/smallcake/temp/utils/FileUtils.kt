@@ -15,6 +15,7 @@ import java.io.IOException
 /**
  * MyApplication --  com.smallcake.utils
  * Created by Small Cake on  2017/8/31 15:52.
+ * 文件工具类
  */
 object FileUtils {
     /**

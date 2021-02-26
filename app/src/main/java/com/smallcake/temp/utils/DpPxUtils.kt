@@ -2,6 +2,9 @@ package com.smallcake.temp.utils
 
 import com.smallcake.temp.MyApplication
 
+/**
+ * 单位转换
+ */
 object DpPxUtils {
     fun dp2pxFloat(dpValue: Float): Float {
         val scale =
