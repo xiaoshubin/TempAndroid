@@ -2,7 +2,7 @@
 
 
 
-使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项11，工具20
+使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项11，工具22
 
 # 配置项
 
@@ -53,7 +53,7 @@ keystore.alias_password = 123456
 | [ViewBindingKtx](https://github.com/DylanCaiCoding/ViewBindingKtx) | viewBinding扩展库                                            |
 | [leakcanary](https://github.com/square/leakcanary)           | 检测内存泄漏                                                 |
 | [XXPermissions](https://github.com/getActivity/XXPermissions) | 权限管理                                                     |
-| [koin](https://github.com/InsertKoinIO/koin)                 | 依赖注入                                                     |
+| [koin](https://github.com/InsertKoinIO/koin)                 | 依赖注入https://insert-koin.io/                              |
 | [RxLifecycle](https://github.com/trello/RxLifecycle)         | 生命周期绑定，让应用更稳定                                   |
 | [Apollo](https://github.com/Sloaix/Apollo)                   | 事件通知，替代EventBus                                       |
 | [MMKV](https://github.com/Tencent/MMKV)                      | 用于替代SharedPreferences，性能更优，还可以通过importFromSharedPreferences() 函数，迁移SharedPreferences已有数据 |
@@ -118,6 +118,10 @@ keystore.alias_password = 123456
 20. `DataBindingAdapter`：dataBinding控件xml属性扩展
 
 21. `ZxingUtils`：二维码生成
+
+22. `MMKVUtils`：数据存储工具
+
+    
 
     
 
