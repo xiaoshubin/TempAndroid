@@ -11,9 +11,8 @@ import com.smallcake.temp.api.WeatherImpl
 import com.smallcake.temp.base.Constant
 import com.smallcake.temp.http.DataProvider
 import com.smallcake.temp.http.HttpLogInterceptor
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -24,27 +23,29 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * 网络请求依赖注入module
  */
+
+@OptIn(KoinApiExtension::class)
 val httpModule = module {
     //网络数据json格式化
-    var gson: Gson? = GsonBuilder()
+    val gson: Gson? = GsonBuilder()
         .setDateFormat("yyyy-MM-dd HH:mm:ss")
         .serializeNulls()
         .create()
 
     //网络请求okhttp客户端
-    var okHttpClientBuilder: OkHttpClient.Builder =OkHttpClient.Builder()
+    val okHttpClientBuilder: OkHttpClient.Builder =OkHttpClient.Builder()
     okHttpClientBuilder.addInterceptor(HttpLogInterceptor())//日志打印拦截器
 
 
     //公共头部拦截器
-    val haveHeader = false
-    if (haveHeader)okHttpClientBuilder.addInterceptor(Interceptor{
-        val request: Request = it.request()
-            .newBuilder()
-            .addHeader("Authorization", "Bearer")
-            .build()
-         it.proceed(request)
-    })
+//    val haveHeader = false
+//    if (haveHeader)okHttpClientBuilder.addInterceptor(Interceptor{
+//        val request: Request = it.request()
+//            .newBuilder()
+//            .addHeader("Authorization", "Bearer")
+//            .build()
+//         it.proceed(request)
+//    })
 
     val okHttpClient = okHttpClientBuilder.build()
 
@@ -78,6 +79,7 @@ val httpModule = module {
             .build()
     }
     //网络数据提供者
+
     single {DataProvider()}
     single { WeatherImpl() }
     single { MobileImpl() }

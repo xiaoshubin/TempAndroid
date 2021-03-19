@@ -44,7 +44,7 @@ fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> 
 /**
  * 在生命周期结束时，取消请求
  * @receiver io.reactivex.Observable<T>
- * @param owner LifecycleOwner
+ * @param provider LifecycleProvider<Lifecycle.Event>
  * @return io.reactivex.Observable<T>
  */
 fun <T> Observable<T>.bindLife(provider: LifecycleProvider<Lifecycle.Event>): Observable<T> {

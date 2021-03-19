@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 class HttpLogInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-            var request = chain.request()
+            val request = chain.request()
             val startNs = System.nanoTime()//请求发起的时间
             if (request.method == "POST") {
                 if (BuildConfig.DEBUG)Log.d("SmallOkHttp>>>", "【${request.method}】发送请求 ${request.url}====================================参数开始==============================================${logParams(request)}====================================参数结束==============================================")

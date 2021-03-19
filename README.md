@@ -2,7 +2,7 @@
 
 
 
-使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项11，工具22
+使用Kotlin构建的项目模板，包含大量常用的第三方库，配置项11，工具23
 
 # 配置项
 
@@ -121,11 +121,10 @@ keystore.alias_password = 123456
 
 22. `MMKVUtils`：数据存储工具
 
-    
+23. `AppBarUtils`：根据AppBarLayout滚动来逐渐改变控件颜色
 
     
 
-    
 # 基类
 
 1.BaseActivity：继承AppCompatActivity的基类页面

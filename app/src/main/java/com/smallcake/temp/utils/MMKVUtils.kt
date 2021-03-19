@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import com.tencent.mmkv.MMKV
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 import java.io.*
 import java.util.*
 
 @KoinApiExtension
 object MMKVUtils : KoinComponent {
-    private val mmkv: MMKV = get()
+    //You should Call MMKV.initialize() first.
+    private val mmkv: MMKV = MMKV.mmkvWithID("small_data")!!
 
     /**
      * desc:保存对象
@@ -45,7 +45,7 @@ object MMKVUtils : KoinComponent {
         val str = mmkv.getString(key, "")
         str?.let {
             //将16进制的数据转为数组，准备反序列化
-            val stringToBytes = StringToBytes(it)
+            val stringToBytes = stringToBytes(it)
             val bis = ByteArrayInputStream(stringToBytes)
             val ois = ObjectInputStream(bis)
             //返回反序列化得到的对象
@@ -74,7 +74,7 @@ object MMKVUtils : KoinComponent {
     /**
      * 把16进制字符串转换成字节数组 @param hex @return
      */
-    private fun StringToBytes(hex: String): ByteArray {
+    private fun stringToBytes(hex: String): ByteArray {
         val len = hex.length / 2
         val result = ByteArray(len)
         val achar = hex.toCharArray()
@@ -83,7 +83,6 @@ object MMKVUtils : KoinComponent {
             val toBe1 = toByte(achar[pos])
             val a = toBe1 shl 4
             val b = toByte(achar[pos + 1])
-            val toByte = toByte(achar[pos + 1])
             result[i] = ((a or b).toByte())
         }
         return result
