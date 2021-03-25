@@ -1,4 +1,4 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.View.MeasureSpec
 import android.view.WindowManager
 import androidx.annotation.FloatRange
-import com.smallcake.temp.MyApplication
 
 
 /**
@@ -22,13 +21,13 @@ object ScreenUtils {
      */
     fun getHeight(): Int {
         val displayMetrics = DisplayMetrics()
-        val windowManager = MyApplication.instance.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
          windowManager.defaultDisplay.getRealMetrics(displayMetrics)
         return displayMetrics.heightPixels
     }
     fun getWidth(): Int {
         val displayMetrics = DisplayMetrics()
-        val windowManager = MyApplication.instance.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
          windowManager.defaultDisplay.getRealMetrics(displayMetrics)
         return displayMetrics.widthPixels
     }
@@ -40,10 +39,9 @@ object ScreenUtils {
      */
     fun getStatusHeight(): Int {
         var result = 0
-        val resourceId: Int =MyApplication.instance.getResources()
-            .getIdentifier("status_bar_height", "dimen", "android")
+        val resourceId: Int =SmallUtils.context?.resources?.getIdentifier("status_bar_height", "dimen", "android")?:24
         if (resourceId > 0) {
-            result = MyApplication.instance.getResources().getDimensionPixelSize(resourceId)
+            result = SmallUtils.context?.resources?.getDimensionPixelSize(resourceId)?:0
         }
         return result
     }

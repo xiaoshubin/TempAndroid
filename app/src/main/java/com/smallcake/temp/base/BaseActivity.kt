@@ -7,8 +7,8 @@ import androidx.lifecycle.Lifecycle
 import com.lsxiao.apollo.core.Apollo
 import com.lsxiao.apollo.core.contract.ApolloBinder
 import com.lxj.xpopup.impl.LoadingPopupView
+import com.smallcake.smallutils.ActivityCollector
 import com.smallcake.temp.http.DataProvider
-import com.smallcake.temp.utils.ActivityCollector
 import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import com.trello.rxlifecycle2.LifecycleProvider
 import org.koin.android.ext.android.get

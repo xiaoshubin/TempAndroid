@@ -1,4 +1,4 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder

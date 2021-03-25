@@ -1,6 +1,5 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
-import com.smallcake.temp.MyApplication
 
 /**
  * 单位转换
@@ -8,19 +7,19 @@ import com.smallcake.temp.MyApplication
 object DpPxUtils {
     fun dp2pxFloat(dpValue: Float): Float {
         val scale =
-            MyApplication.instance.resources.displayMetrics.density
+           SmallUtils.context?.resources?.displayMetrics?.density?:0.0f
         return dpValue * scale + 0.5f
     }
 
     fun dp2px(dpValue: Float): Int {
-        val scale = MyApplication.instance.applicationContext.resources
-            .displayMetrics.density
+        val scale = SmallUtils.context?.applicationContext?.resources
+            ?.displayMetrics?.density ?:0.0f
         return (dpValue * scale + 0.5f).toInt()
     }
 
     fun px2dp(pxValue: Float): Int {
         val scale =
-            MyApplication.instance.resources.displayMetrics.density
+            SmallUtils.context?.resources?.displayMetrics?.density ?:0.0f
         return (pxValue / scale + 0.5f).toInt()
     }
 

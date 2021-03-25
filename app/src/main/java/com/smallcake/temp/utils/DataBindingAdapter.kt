@@ -13,9 +13,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.util.Util
+import com.smallcake.smallutils.DpPxUtils.dp2pxFloat
 import com.smallcake.temp.MyApplication
 import com.smallcake.temp.R
-import com.smallcake.temp.utils.DpPxUtils.dp2pxFloat
 import java.security.MessageDigest
 
 /**
@@ -23,9 +23,11 @@ import java.security.MessageDigest
  * author: SmallCake
  * 注意使用条件：需要在在layout包裹的xml中使用
  * ImageView控件中url = "@{item.img_path}"
+ * 必须使用@JvmStatic标记，否则在xml文件中使用会报错
  */
 object DataBindingAdapter {
     //普通网络图片
+    @JvmStatic
     @BindingAdapter("url")
     fun bindUrl(view: ImageView?, imageUrl: String?) {
         Glide.with(view!!)
@@ -34,6 +36,7 @@ object DataBindingAdapter {
     }
 
     //圆形图片
+    @JvmStatic
     @BindingAdapter("circleUrl")
     fun bindImageCircleUrl(view: ImageView?, imageUrl: String?) {
         val options = RequestOptions()
@@ -47,6 +50,7 @@ object DataBindingAdapter {
     }
 
     //圆角图片,圆角系数,默认为9
+    @JvmStatic
     @BindingAdapter(value = ["roundUrl", "roundRadius"], requireAll = false)
     fun bindImageRoundUrl(
         view: ImageView?,
@@ -72,6 +76,7 @@ object DataBindingAdapter {
      * @param imageRoundUrl  要加载的图片url
      * @param roundingRadius 圆角弧度 默认9
      */
+    @JvmStatic
     @BindingAdapter(value = ["topRoundUrl", "roundRadius"], requireAll = false)
     fun bindImageTopRoundUrl(
         view: ImageView?,

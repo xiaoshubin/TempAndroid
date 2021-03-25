@@ -1,4 +1,4 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.animation.ArgbEvaluator
 import android.graphics.Color
@@ -31,6 +31,11 @@ object AppBarUtils {
 
     //从灰色到白色
     fun setColorGrayWhite(appBar: AppBarLayout, viewTarget: View) {
-        setColorChange(appBar, viewTarget, "#f5f5f5", "#ffffff")
+        setColorChange(
+            appBar,
+            viewTarget,
+            "#f5f5f5",
+            "#ffffff"
+        )
     }
 }

@@ -6,6 +6,7 @@ import androidx.multidex.MultiDex
 import com.lsxiao.apollo.core.Apollo
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.smallcake.smallutils.SmallUtils
 import com.smallcake.temp.module.httpModule
 import com.tencent.mmkv.MMKV
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,6 +35,8 @@ class MyApplication : Application() {
         Apollo.init(AndroidSchedulers.mainThread(), this)
         //数据存储
         MMKV.initialize(this)
+        //小工具初始化
+        SmallUtils.init(this)
     }
 
 

@@ -1,4 +1,4 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.R
 import android.content.Context
@@ -13,23 +13,23 @@ import androidx.core.view.ViewCompat
 /**
  * 解决shape.xml文件过多，动态设置圆角样式
  * //圆角
- * ShapeCreator.create()
- * .setCornerRadius(10)
- * .setSolidColor(Color.GRAY)
- * .into(btn1);
+ShapeCreator.create()
+.setCornerRadius(10)
+.setSolidColor(Color.GRAY)
+.into(btn1);
  * //带交互效果状态
- * ShapeCreator.create()
- * .setCornerRadius(10)
- * .setStateEnabled(true)
- * .setSolidColor(Color.GRAY)
- * .setSolidPressColor(Color.DKGRAY)
- * .setStrokeColor(Color.CYAN)
- * .setStrokePressColor(Color.MAGENTA)
- * .setStrokeWidth(2)
- * .setStateTextColorEnabled(true)
- * .setTextColor(Color.BLACK)
- * .setTextPressColor(Color.WHITE)
- * .into(btn18);
+ShapeCreator.create()
+.setCornerRadius(10)
+.setStateEnabled(true)
+.setSolidColor(Color.GRAY)
+.setSolidPressColor(Color.DKGRAY)
+.setStrokeColor(Color.CYAN)
+.setStrokePressColor(Color.MAGENTA)
+.setStrokeWidth(2)
+.setStateTextColorEnabled(true)
+.setTextColor(Color.BLACK)
+.setTextPressColor(Color.WHITE)
+.into(btn18)
  */
 class ShapeCreator {
     /**

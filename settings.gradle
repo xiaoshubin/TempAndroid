@@ -1,2 +1,3 @@
+include ':smallutils'
 include ':app'
 rootProject.name = "TempAndroid"

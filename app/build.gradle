@@ -118,6 +118,7 @@ dependencies {
     implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$rxjava_version"
     //Apollo的核心库,事件通知
     implementation 'com.github.lsxiao.Apollo:core:1.0.2'
+    implementation project(path: ':smallutils')
     kapt "com.github.lsxiao.Apollo:processor:1.0.2"//kotlin版本的
     //RecyclerView适配器
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'

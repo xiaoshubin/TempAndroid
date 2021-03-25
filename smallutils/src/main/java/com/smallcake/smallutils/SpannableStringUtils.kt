@@ -1,4 +1,4 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.graphics.*
 import android.graphics.BlurMaskFilter.Blur
@@ -11,7 +11,6 @@ import android.text.Spanned
 import android.text.style.*
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import com.smallcake.temp.MyApplication
 
 /**
  * Date: 2019/11/20
@@ -507,7 +506,7 @@ class SpannableStringUtils private constructor() {
             }
             if (imageIsBitmap || imageIsDrawable || imageIsUri || imageIsResourceId) {
                 if (imageIsBitmap) {
-                    mBuilder.setSpan(ImageSpan(MyApplication.instance, bitmap!!), start, end, flag)
+                    mBuilder.setSpan(ImageSpan(SmallUtils.context!!, bitmap!!), start, end, flag)
                     bitmap = null
                     imageIsBitmap = false
                 } else if (imageIsDrawable) {
@@ -515,12 +514,12 @@ class SpannableStringUtils private constructor() {
                     drawable = null
                     imageIsDrawable = false
                 } else if (imageIsUri) {
-                    mBuilder.setSpan(ImageSpan(MyApplication.instance, uri!!), start, end, flag)
+                    mBuilder.setSpan(ImageSpan(SmallUtils.context!!, uri!!), start, end, flag)
                     uri = null
                     imageIsUri = false
                 } else {
                     mBuilder.setSpan(
-                        ImageSpan(MyApplication.instance, resourceId),
+                        ImageSpan(SmallUtils.context!!, resourceId),
                         start,
                         end,
                         flag

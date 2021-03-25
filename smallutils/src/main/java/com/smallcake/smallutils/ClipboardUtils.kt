@@ -1,10 +1,9 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.text.TextUtils
-import com.smallcake.temp.MyApplication
 
 /**
  * MyApplication --  com.smallcake.utils
@@ -13,22 +12,22 @@ import com.smallcake.temp.MyApplication
  */
 object ClipboardUtils {
     //复制内容
-    fun copy( msg: String?) {
+    fun copy(context: Context, msg: String?) {
         if (TextUtils.isEmpty(msg)) {
-            showToast("复制的内容为空")
+            ToastUtil.showLong("复制的内容为空")
             return
         }
-        val cm = MyApplication.instance.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText(null, msg)
         cm.setPrimaryClip(clipData)
-        showToast("复制成功")
+        ToastUtil.showLong("复制成功")
     }
     //粘贴,注意：AndroidQ 对剪切板的改动是当应用没有获取到焦点时，无法读取剪切板内容。
-    fun paste(): String? {
-        val cm = MyApplication.instance.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    fun paste(context: Context): String? {
+        val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val cd2 = cm.primaryClip
         if (!cm.hasPrimaryClip()) {
-            showToast("剪切板内容为空")
+            ToastUtil.showLong("剪切板内容为空")
             return ""
         }
         var s: String? = ""

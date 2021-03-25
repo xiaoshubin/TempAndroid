@@ -1,9 +1,10 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import java.util.regex.Pattern
@@ -12,6 +13,7 @@ import java.util.regex.Pattern
  * EditText工具类
  */
 object EditTextUtils {
+    private const val TAG = "EditTextUtils"
     /**
      * 验证多个输入栏未输入，提示为：（"请填写" + 你xml设置的Hint字段）
      * @param editTexts 编辑框
@@ -27,7 +29,7 @@ object EditTextUtils {
                 hintStr = editText.hint.toString()
             } catch (e: Exception) {
 //                e.printStackTrace()
-                lww( "$editText  未设置 android:hint=\"\" 属性")
+                Log.w( TAG,"$editText  未设置 android:hint=\"\" 属性")
             }
             if (TextUtils.isEmpty(str)) {
                 if (!TextUtils.isEmpty(hintStr)) {

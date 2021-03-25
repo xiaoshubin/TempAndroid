@@ -1,14 +1,10 @@
 package com.smallcake.temp.utils
 
-import android.annotation.SuppressLint
 import com.tencent.mmkv.MMKV
-import org.koin.core.component.KoinApiExtension
-import org.koin.core.component.KoinComponent
 import java.io.*
 import java.util.*
 
-@KoinApiExtension
-object MMKVUtils : KoinComponent {
+object MMKVUtils {
     //You should Call MMKV.initialize() first.
     private val mmkv: MMKV = MMKV.mmkvWithID("small_data")!!
 
@@ -18,7 +14,6 @@ object MMKVUtils : KoinComponent {
      * @param obj
      * @remind 要保存的对象，只能保存实现了serializable的对象
      */
-    @JvmStatic
     fun saveObject(key: String, obj: Any) {
         try {
             //先将序列化结果写到byte缓存中，其实就分配一个内存空间
@@ -40,7 +35,6 @@ object MMKVUtils : KoinComponent {
      * @param key String
      * @return T
      */
-    @JvmStatic
     fun <T : Any?> readObject(key: String): T? {
         val str = mmkv.getString(key, "")
         str?.let {
@@ -92,32 +86,32 @@ object MMKVUtils : KoinComponent {
         return "0123456789ABCDEF".indexOf(c)
     }
 
-    @SuppressLint("CommitPrefEdits")
-    @JvmStatic
-    fun putAny(key: String, obj: Any) {
-        mmkv.edit().apply() {
+    fun putAny(key: String?, obj: Any) {
+        with(mmkv) {
             when (obj) {
-                is String -> putString(key, obj)
-                is Int ->putInt(key, obj)
-                is Boolean ->putBoolean(key, obj)
-                is Float ->putFloat(key, obj)
-                is Long ->putLong(key, obj)
-                else ->putString(key, obj.toString())
+                is String -> encode(key, obj)
+                is Int -> encode(key, obj)
+                is Boolean -> encode(key, obj)
+                is Float -> encode(key, obj)
+                is Long -> encode(key, obj)
+                else -> encode(key, obj.toString())
             }
         }
 
-    }
 
-    @JvmStatic
-    fun getAny(key: String, defaultObject: Any): Any? {
-        return when (defaultObject) {
-            is String -> mmkv.getString(key, defaultObject )
-            is Int -> mmkv.getInt(key, (defaultObject ))
-            is Boolean -> mmkv.getBoolean(key, (defaultObject))
-            is Float -> mmkv.getFloat(key, (defaultObject))
-            is Long -> mmkv.getLong(key, (defaultObject))
-            else -> null
+    }
+    fun getAny(key: String?, obj: Any?): Any? {
+        return with(mmkv) {
+            when (obj) {
+                is String -> decodeString(key,obj)
+                is Int -> decodeInt(key, obj)
+                is Boolean -> decodeBool(key, obj)
+                is Float -> decodeFloat(key, obj)
+                is Long -> decodeLong(key, obj)
+                else -> decodeString(key, obj.toString())
+            }
         }
     }
+
 
 }

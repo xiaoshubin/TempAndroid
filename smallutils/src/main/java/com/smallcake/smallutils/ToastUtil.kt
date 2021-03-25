@@ -1,7 +1,6 @@
-package com.smallcake.temp.utils
+package com.smallcake.smallutils
 
 import android.widget.Toast
-import com.smallcake.temp.MyApplication
 
 
 /**
@@ -24,7 +23,7 @@ class ToastUtil private constructor() {
         private fun show(message: CharSequence, duration: Int) {
             try {
                 if (toast != null) toast!!.cancel()
-                toast = Toast.makeText(MyApplication.instance, message, duration)
+                toast = Toast.makeText(SmallUtils.context, message, duration)
                 if (toast != null) toast!!.show()
             } catch (ex: Exception) {
             }
