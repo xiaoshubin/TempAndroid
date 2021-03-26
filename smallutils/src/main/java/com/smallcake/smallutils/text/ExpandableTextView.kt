@@ -34,42 +34,46 @@ import com.smallcake.smallutils.R
 
 /**
  * 可展开的文本控件
-<com.xsd.jx.custom.ExpandableTextView
+<com.smallcake.smallutils.text.ExpandableTextView
+    android:id="@+id/tv_desc"
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     expandableTextView:animDuration="300"
-    expandableTextView:maxCollapsedLines="1"
-    expandableTextView:expandDrawable="@mipmap/ic_txt_arrow_down"
-    expandableTextView:collapseDrawable="@mipmap/ic_txt_arrow_up">
+    expandableTextView:maxCollapsedLines="1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:paddingTop="@dimen/dp_16"
-            android:paddingBottom="@dimen/dp_16"
-            android:paddingLeft="@dimen/dp_16"
-            android:id="@id/expandable_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="文本内容，超过一行显示折叠图标，否则不显示折叠图标"
-            android:textColor="#666666"
-            android:textSize="@dimen/h5" />
-        <ImageButton
-            android:padding="@dimen/dp_16"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:id="@id/expand_collapse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:paddingTop="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16"
+        android:paddingLeft="@dimen/dp_16"
+        android:id="@id/expandable_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="文本内容，超过一行显示折叠图标，否则不显示折叠图标"
+        android:textColor="#666666"
+        android:textSize="16sp" />
+    <ImageButton
+        android:padding="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:id="@id/expand_collapse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     </LinearLayout>
-</com.xsd.jx.custom.ExpandableTextView>
+</com.smallcake.smallutils.text.ExpandableTextView>
 
- 注意：里面的TextView的id必须为：android:id="@id/expandable_text"，ImageButton的id必须为：android:id="@id/expand_collapse"
- 使用：maxCollapsedLines为收缩时显示行数
-       expandDrawable为你自己的展开图标
-       collapseDrawable为你自己的收缩图标
+ 注意：
+    1.里面的TextView的id必须为：android:id="@id/expandable_text"，ImageButton的id必须为：android:id="@id/expand_collapse"
+    2.里面的TextView不能设置android:ellipsize="end"和android:maxLines="1"属性
+ 使用：
+    0.必须在代码中使用此控件的setText重新设置文本内容
+    1.maxCollapsedLines为收缩时显示行数
+    2.expandDrawable为你自己的展开图标
+    3.collapseDrawable为你自己的收缩图标
+    4.ImageButton设置android:layout_gravity="right|bottom"，图标会随文字上下移动
  */
 class ExpandableTextView : LinearLayout, View.OnClickListener {
     private var mTv: TextView? = null

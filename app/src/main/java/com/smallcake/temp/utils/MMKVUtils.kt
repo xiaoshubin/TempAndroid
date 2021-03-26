@@ -1,9 +1,14 @@
 package com.smallcake.temp.utils
 
+import android.os.Parcelable
 import com.tencent.mmkv.MMKV
 import java.io.*
 import java.util.*
 
+/**
+ * MMKV存储数据工具类
+ *
+ */
 object MMKVUtils {
     //You should Call MMKV.initialize() first.
     private val mmkv: MMKV = MMKV.mmkvWithID("small_data")!!
@@ -13,7 +18,9 @@ object MMKVUtils {
      * @param key
      * @param obj
      * @remind 要保存的对象，只能保存实现了serializable的对象
+     * 建议使用 @{encodeParcelable(key: String?, obj: Parcelable?)}
      */
+    @java.lang.Deprecated
     fun saveObject(key: String, obj: Any) {
         try {
             //先将序列化结果写到byte缓存中，其实就分配一个内存空间
@@ -31,10 +38,19 @@ object MMKVUtils {
     }
 
     /**
+     * 保存实现了Parcelable的对象数据
+     * @param key String?
+     * @param obj Parcelable?
+     * @return Boolean
+     */
+    fun encodeParcelable(key: String?, obj: Parcelable?) = mmkv.encode(key, obj)
+
+    /**
      * 读取对象
      * @param key String
      * @return T
      */
+    @java.lang.Deprecated
     fun <T : Any?> readObject(key: String): T? {
         val str = mmkv.getString(key, "")
         str?.let {
@@ -48,6 +64,14 @@ object MMKVUtils {
         return null
     }
 
+    /**
+     * 读取实现了Parcelable的对象数据
+     * @param key String?
+     * @param tClass Class<T>
+     * @return T?
+     */
+    fun <T : Parcelable?> decodeParcelable(key: String?, tClass:Class<T>): T?
+            = mmkv.decodeParcelable(key,tClass)
     /**
      * desc:将数组转为16进制
      * @param bArray
