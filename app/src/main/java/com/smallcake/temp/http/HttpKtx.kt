@@ -1,8 +1,8 @@
 package com.smallcake.temp.http
 
 import androidx.lifecycle.Lifecycle
-import com.lxj.xpopup.impl.LoadingPopupView
 import com.orhanobut.logger.Logger
+import com.smallcake.temp.module.LoadDialog
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.Observable
@@ -29,7 +29,7 @@ fun <T> Observable<T>.im(): Observable<T> {
  * @param fail Function1<[@kotlin.ParameterName] String?, Unit>?
  * @param dialog LoadingPopupView?
  */
-fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> Unit)? = null,dialog: LoadingPopupView? = null){
+fun <T> Observable<T>.sub(success: ((t: T) -> Unit), fail: ((error: String?) -> Unit)? = null,dialog: LoadDialog? = null){
    return subscribe(object :OnDataSuccessListener<T>(dialog){
        override fun onSuccess(t: T) {
            success.invoke(t)

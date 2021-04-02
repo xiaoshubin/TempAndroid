@@ -14,6 +14,7 @@ class BaseResponse<T> {
     var result: T? = null
         private set
 
+
     fun setResult(result: T) {
         this.result = result
     }

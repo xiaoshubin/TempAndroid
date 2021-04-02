@@ -1,7 +1,7 @@
 package com.smallcake.temp.http
 
 import com.bumptech.glide.load.HttpException
-import com.lxj.xpopup.impl.LoadingPopupView
+import com.smallcake.temp.module.LoadDialog
 import com.smallcake.temp.utils.lee
 import com.smallcake.temp.utils.showToast
 import io.reactivex.observers.DisposableObserver
@@ -13,9 +13,9 @@ interface OnErrorCallback {
     fun onErrMsg(msg: String)
 }
 
-abstract class OnDataSuccessListener<T> constructor(dialog: LoadingPopupView? = null) : DisposableObserver<T>(), OnErrorCallback {
+abstract class OnDataSuccessListener<T> constructor(dialog: LoadDialog? = null) : DisposableObserver<T>(), OnErrorCallback {
 
-    private val loadDialog: LoadingPopupView? = dialog
+    private val loadDialog: LoadDialog? = dialog
     private fun showLoading() = loadDialog?.show()
     private fun hideLoading() = loadDialog?.dismiss()
     protected abstract fun onSuccess(t: T)

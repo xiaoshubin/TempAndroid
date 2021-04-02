@@ -31,4 +31,21 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">#EAEAEA</item>
     </style>
+    <!-- IOSDialog -->
+    <style name="Theme.Ios.Dialog" parent="@android:style/Theme.Dialog">
+        <!-- Dialog的windowFrame框为无 -->
+        <!-- <item name="android:windowFrame">@null</item> -->
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置dialog的背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景是否模糊显示 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:textColorPrimaryInverse">@android:color/black</item>
+    </style>
 </resources>

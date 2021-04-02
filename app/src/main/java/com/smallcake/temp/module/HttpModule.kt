@@ -1,9 +1,8 @@
 package com.smallcake.temp.module
 
-import android.content.Context
+import android.app.Activity
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.lxj.xpopup.XPopup
 import com.smallcake.temp.api.MobileApi
 import com.smallcake.temp.api.MobileImpl
 import com.smallcake.temp.api.WeatherApi
@@ -49,9 +48,10 @@ val httpModule = module {
 
     val okHttpClient = okHttpClientBuilder.build()
 
-
     //单例，加载圈圈
-    single { (context:Context) -> XPopup.Builder(context).asLoading().setTitle("加载中...") }
+    single {(context: Activity) ->LoadDialog(context)
+//        XPopup.Builder(MyApplication.instance.applicationContext).asLoading().setTitle("加载中...")
+    }
     //单例retrofit,需要单独定义主机地址
     single (named("hasUrl")){ (url:String?)->
         Retrofit.Builder()

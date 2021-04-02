@@ -76,9 +76,10 @@ import com.smallcake.smallutils.R
     4.ImageButton设置android:layout_gravity="right|bottom"，图标会随文字上下移动
  */
 class ExpandableTextView : LinearLayout, View.OnClickListener {
+    private val TAG = "ExpandableTextView"
     private var mTv: TextView? = null
     private var mButton : ImageButton? = null// Button to expand/collapse
-    private var mRelayout = false
+    private var mRelayout = true //是否正在动态布局，
     private var mCollapsed = true // Show short version as default.
     private var mCollapsedHeight = 0
     private var mTextHeightWithMaxLines = 0
@@ -89,7 +90,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
     private var mAnimationDuration = 0
     private var mAnimAlphaStart = 0f
     private var mAnimating = false
-    private var mListener: OnExpandStateChangeListener? = null
+    private var mListener: ((TextView, Boolean) -> Unit?)? = null
     private var mCollapsedStatus: SparseBooleanArray? = null
     private var mPosition = 0
 
@@ -108,23 +109,16 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        if (mButton!!.visibility != View.VISIBLE) {
-            return
-        }
-        mCollapsed = !mCollapsed
+        if (mButton!!.visibility != View.VISIBLE) {return}
+        mCollapsed = !mCollapsed//收缩取反
         mButton!!.setImageDrawable(if (mCollapsed) mExpandDrawable else mCollapseDrawable)
-        if (mCollapsedStatus != null) {
-            mCollapsedStatus!!.put(mPosition, mCollapsed)
-        }
+        if (mCollapsedStatus != null) {mCollapsedStatus!!.put(mPosition, mCollapsed)}
 
         mAnimating = true
         val animation: Animation = if (mCollapsed) {
             ExpandCollapseAnimation(this, height, mCollapsedHeight)
         } else {
-            ExpandCollapseAnimation(
-                this, height, height +
-                        mTextHeightWithMaxLines - mTv!!.height
-            )
+            ExpandCollapseAnimation(this, height, height +mTextHeightWithMaxLines - mTv!!.height)
         }
         animation.fillAfter = true
         animation.setAnimationListener(object : Animation.AnimationListener {
@@ -134,9 +128,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
             override fun onAnimationEnd(animation: Animation) {
                 clearAnimation()
                 mAnimating = false
-                if (mListener != null) {
-                    mListener!!.onExpandStateChanged(mTv, !mCollapsed)
-                }
+                mTv?.let { mListener?.invoke(it, !mCollapsed) }
             }
 
             override fun onAnimationRepeat(animation: Animation) {}
@@ -155,12 +147,13 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+//        Log.d(TAG,"Relayout:${mRelayout}")
         if (!mRelayout || visibility == View.GONE) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
             return
         }
         mRelayout = false
-        mButton!!.visibility = View.GONE
+        mButton!!.visibility = View.GONE//默认隐藏收缩按钮，因为文本可能<=最大显示行数
         mTv!!.maxLines = Int.MAX_VALUE
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (mTv!!.lineCount <= mMaxCollapsedLines) {
@@ -168,6 +161,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         }
         if (mCollapsed) {
             mTv!!.maxLines = mMaxCollapsedLines
+//            mTv!!.ellipsize = TextUtils.TruncateAt.END
         }
         mButton!!.visibility = View.VISIBLE
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -178,7 +172,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         }
     }
 
-    fun setOnExpandStateChangeListener(listener: OnExpandStateChangeListener?) {
+    fun setOnExpandStateChangeListener(listener:(TextView, Boolean) -> Unit?) {
         mListener = listener
     }
 
@@ -195,9 +189,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
     }
 
     var text: CharSequence?
-        get() = if (mTv == null) {
-            ""
-        } else mTv!!.text
+        get() = if (mTv == null) {""} else mTv!!.text
         set(text) {
             mRelayout = true
             mTv!!.text = text
@@ -205,37 +197,15 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         }
 
     private fun init(attrs: AttributeSet?) {
-        val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView)
-        mMaxCollapsedLines = typedArray.getInt(
-            R.styleable.ExpandableTextView_maxCollapsedLines,
-            MAX_COLLAPSED_LINES
-        )
-        mAnimationDuration = typedArray.getInt(
-            R.styleable.ExpandableTextView_animDuration,
-            DEFAULT_ANIM_DURATION
-        )
-        mAnimAlphaStart = typedArray.getFloat(
-            R.styleable.ExpandableTextView_animAlphaStart,
-            DEFAULT_ANIM_ALPHA_START
-        )
-        mExpandDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_expandDrawable)
-        mCollapseDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_collapseDrawable)
-        if (mExpandDrawable == null) {
-            mExpandDrawable = getDrawable(
-                context,
-                android.R.drawable.arrow_up_float
-            )
-        }
-        if (mCollapseDrawable == null) {
-            mCollapseDrawable = getDrawable(
-                context,
-                android.R.drawable.arrow_down_float
-            )
-        }
+        val typedArray =context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView)
+        mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandableTextView_maxCollapsedLines,MAX_COLLAPSED_LINES)
+        mAnimationDuration = typedArray.getInt(R.styleable.ExpandableTextView_animDuration,DEFAULT_ANIM_DURATION)
+        mAnimAlphaStart = typedArray.getFloat(R.styleable.ExpandableTextView_animAlphaStart,DEFAULT_ANIM_ALPHA_START)
+        mExpandDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_expandDrawable)?:getDrawable(context,android.R.drawable.arrow_up_float)
+        mCollapseDrawable = typedArray.getDrawable(R.styleable.ExpandableTextView_collapseDrawable)?:getDrawable(context,android.R.drawable.arrow_down_float)
         typedArray.recycle()
         orientation = VERTICAL
-        visibility = View.GONE
+//        visibility = View.VISIBLE
     }
 
     private fun findViews() {

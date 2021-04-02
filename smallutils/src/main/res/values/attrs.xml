@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableTextView">
+        <attr format="integer" name="maxCollapsedLines"/>
+        <attr format="integer" name="animDuration"/>
+        <attr format="float" name="animAlphaStart"/>
+        <attr format="reference" name="expandDrawable"/>
+        <attr format="reference" name="collapseDrawable"/>
+    </declare-styleable>
+    <item name="expand_collapse" type="id"/>
+    <item name="expandable_text" type="id"/>
+    <!-- 自动追加单位元的小控件 -->
+    <declare-styleable name="CompanyEdittext">
+        <attr name="ce_text" format="string" />
+        <attr name="ce_text_color" format="color" />
+    </declare-styleable>
+</resources>

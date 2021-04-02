@@ -10,6 +10,9 @@
         <variable
             name="user"
             type="com.smallcake.temp.bean.UserBean" />
+        <variable
+            name="viewmodel"
+            type="com.smallcake.temp.module.MobileViewModule" />
     </data>
 
     <LinearLayout
@@ -19,10 +22,13 @@
         tools:context=".MainActivity">
 
         <com.smallcake.smallutils.text.ExpandableTextView
+            android:layout_margin="8dp"
             android:id="@+id/tv_desc"
             xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_100"
+            android:layout_height="wrap_content"
+            expandableTextView:expandDrawable="@mipmap/ic_txt_arrow_down"
+            expandableTextView:collapseDrawable="@mipmap/ic_txt_arrow_up"
             expandableTextView:animDuration="300"
             expandableTextView:maxCollapsedLines="1">
             <LinearLayout
@@ -37,12 +43,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="文本内容，超过一行显示折叠图标，否则不显示折叠图标"
+                    android:text="文本内容，超过一行显示折叠图标，否则不显示折叠图标,文本内容，超过一行显示折叠图标，否则不显示折叠图标，文本内容，超过一行显示折叠图标，我是最后一个字"
                     android:textColor="#666666"
                     android:textSize="16sp" />
                 <ImageButton
+                    android:background="@color/transparent"
+                    android:layout_gravity="end|bottom"
                     android:padding="@dimen/dp_16"
-                    android:layout_marginLeft="@dimen/dp_8"
                     android:id="@id/expand_collapse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -58,11 +65,21 @@
             android:id="@+id/btn_get"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:textSize="60sp"
+            android:gravity="center"
+            android:text="请求数据"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:id="@+id/btn_get2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:text="@{item.component1().toString()}"
+            android:hint="提示内容"
+            android:text="@{viewmodel.phoneData.result.toString()}"
             android:id="@+id/tv_msg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <androidx.viewpager.widget.ViewPager

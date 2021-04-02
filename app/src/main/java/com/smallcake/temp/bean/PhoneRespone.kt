@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PhoneRespone(
-    val areacode: String,
+    var areacode: String,
     val card: String,
     val city: String,
     val company: String,
