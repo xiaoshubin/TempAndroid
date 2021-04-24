@@ -71,7 +71,13 @@ keystore.alias_password = 123456
 | [zxing](https://github.com/zxing/zxing)                      | 二维码生成与扫描（可选），引入地址:`implementation 'com.google.zxing:core:3.3.3'`和`implementation 'com.journeyapps:zxing-android-embedded:3.6.0'`，其中在`utils`中创建了`ZxingUtils`一个工具类，如果不使用zxing记得删除此工具类`ZxingUtils` |
 | [Toasty](https://github.com/GrenderG/Toasty)                 | 让Toast不再单调                                              |
 
+kotlin相关的扩展库
 
+| 库名称         | 引入文件                                                |
+| -------------- | ------------------------------------------------------- |
+| 核心扩展库     | `implementation "androidx.core:core-ktx:1.3.2"`         |
+| activity扩展库 | `implementation "androidx.activity:activity-ktx:1.2.2"` |
+| fragment扩展库 | `implementation "androidx.fragment:fragment-ktx:1.3.2"` |
 
 
 

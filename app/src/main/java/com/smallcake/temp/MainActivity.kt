@@ -3,6 +3,7 @@ package com.smallcake.temp
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
+import coil.load
 import com.smallcake.smallutils.ShapeCreator
 import com.smallcake.temp.base.BaseBindActivity
 import com.smallcake.temp.databinding.ActivityMainBinding
@@ -36,6 +37,8 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
         val module: MobileViewModule by viewModels()
         bind.lifecycleOwner = this
         bind.viewmodel = module
+
+        bind.iv.load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fphotoblog%2F1402%2F07%2Fc7%2F31066355_31066355_1391779709500_mthumb.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620293927&t=acd44048f6ca8548e200395f760fcfb6")
 
 
     }

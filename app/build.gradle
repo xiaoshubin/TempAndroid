@@ -88,6 +88,7 @@ dependencies {
     implementation "com.google.android.material:material:1.2.1"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     //总方法数超过限制>65536支持
     implementation "androidx.multidex:multidex:2.0.1"
     //banner轮播图
@@ -95,7 +96,8 @@ dependencies {
     //日志
     implementation "com.orhanobut:logger:2.2.0"
     //图片加载
-    implementation "com.github.bumptech.glide:glide:4.11.0"
+//    implementation "com.github.bumptech.glide:glide:4.11.0"
+    implementation "io.coil-kt:coil:1.1.1"
     //ViewBinding基类
     implementation "com.dylanc:viewbinding-ktx:1.0.1"
     //权限管理
@@ -108,7 +110,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.9.0"//okhttp
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"//拦截器
     implementation "com.google.code.gson:gson:2.8.6"//gson转换
-    implementation "com.squareup.retrofit2:converter-gson:2.2.0"//对象转换
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"//对象转换
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"//Rxjava转换
     //Rxjava2
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
@@ -131,26 +133,26 @@ dependencies {
      * ------------------------------------------下面为一些常用可选的第三方库---------------------------------------------------
      */
 
-    //沉浸式基础依赖包，必须要依赖
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-    // kotlin扩展（可选）
-    implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
-    //鲁班压缩，压缩图片
-    implementation 'top.zibin:Luban:1.1.8'
-    //日历控件
-    implementation 'com.haibin:calendarview:3.6.9'
-    //资源图片，视频选择器
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0'
-    implementation "androidx.camera:camera-view:1.0.0-alpha19"//解决在使用androidx的时候，可能会出现androidx.camera.view.CameraView找不到
-    //悬浮球
-    implementation 'com.github.princekin-f:EasyFloat:1.3.4'
-    //一行进度监听器
-    implementation 'me.jessyan:progressmanager:1.5.0'
-    //zxing二维码生成扫描
-    implementation 'com.google.zxing:core:3.3.3'
-    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
-    //漂亮的Toast
-    implementation 'com.github.GrenderG:Toasty:1.5.0'
+//    //沉浸式基础依赖包，必须要依赖
+//    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+//    // kotlin扩展（可选）
+//    implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
+//    //鲁班压缩，压缩图片
+//    implementation 'top.zibin:Luban:1.1.8'
+//    //日历控件
+//    implementation 'com.haibin:calendarview:3.6.9'
+//    //资源图片，视频选择器
+//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0'
+//    implementation "androidx.camera:camera-view:1.0.0-alpha19"//解决在使用androidx的时候，可能会出现androidx.camera.view.CameraView找不到
+//    //悬浮球
+//    implementation 'com.github.princekin-f:EasyFloat:1.3.4'
+//    //一行进度监听器
+//    implementation 'me.jessyan:progressmanager:1.5.0'
+//    //zxing二维码生成扫描
+//    implementation 'com.google.zxing:core:3.3.3'
+//    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+//    //漂亮的Toast
+//    implementation 'com.github.GrenderG:Toasty:1.5.0'
 
 
 }

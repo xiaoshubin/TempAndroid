@@ -1,10 +1,10 @@
 package com.smallcake.temp.http
 
-import com.bumptech.glide.load.HttpException
 import com.smallcake.temp.module.LoadDialog
 import com.smallcake.temp.utils.lee
 import com.smallcake.temp.utils.showToast
 import io.reactivex.observers.DisposableObserver
+import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException

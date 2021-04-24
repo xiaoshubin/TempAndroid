@@ -3,7 +3,7 @@ package com.smallcake.temp.utils
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import coil.load
 import com.youth.banner.Banner
 import com.youth.banner.adapter.BannerAdapter
 import com.youth.banner.holder.BannerImageHolder
@@ -50,7 +50,7 @@ class ImgBannerAdapter constructor(datas: List<String>) :
 
     override fun onBindView(holder: BannerImageHolder?, data: String, position: Int, size: Int) {
         holder?.let {
-            Glide.with(holder.itemView).load(data).into(holder.imageView)
+            holder.imageView.load(data)
         }
 
     }
