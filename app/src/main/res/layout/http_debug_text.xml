@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.smallcake.smallutils.text.DragTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/debug_tv"
+    android:textColor="@color/black"
+    android:text="开发模式"
+    android:layout_gravity="end|top"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
