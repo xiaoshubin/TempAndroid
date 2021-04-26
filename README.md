@@ -17,7 +17,7 @@ keystore.alias_password = 123456
 
 2. 配置网络：访问https,避免Anroid9+的手机无法访问http接口，只能访问https接口
 
-3. 配置Title：设置全面屏匹配样式，默认去掉title. `<item name="windowNoTitle">true</item>`
+3. 配置导航栏：使用自定义NavigationBar的方式设置通用导航栏
 
 4. 配置Uri：`filepath_data.xml`,Anroid7+获取文件要以FileProvider的方式获取文件Uri
 

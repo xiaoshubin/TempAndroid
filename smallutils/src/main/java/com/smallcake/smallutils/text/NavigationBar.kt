@@ -146,8 +146,11 @@ class NavigationBar(var context: Context) {
         if (actionBar != null && actionBar!!.isShowing) {
             actionBar?.hide()
         }
-        val parent = contentView?.parent as ViewGroup
-        parent.visibility = View.GONE
+        if (contentView!=null&&contentView?.parent!=null){
+            val parent = contentView?.parent as ViewGroup
+            parent.visibility = View.GONE
+        }
+
     }
 
     /**

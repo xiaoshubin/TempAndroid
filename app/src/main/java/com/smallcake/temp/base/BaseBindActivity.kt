@@ -16,7 +16,6 @@ abstract class BaseBindActivity<VB:ViewBinding>: BaseActivity() {
         setContentView(bind.root)
         //导航栏设置
         val bar = NavigationBar(this)
-        bar.setLayoutId(R.layout.android_navigation_bar)
         bar.setBackgroundColor(Color.WHITE,true)
         bar.backImageView?.setOnClickListener{finish()}
         onCreate(savedInstanceState,bar)
