@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import coil.load
 import com.smallcake.smallutils.ShapeCreator
+import com.smallcake.smallutils.text.NavigationBar
 import com.smallcake.temp.base.BaseBindActivity
 import com.smallcake.temp.databinding.ActivityMainBinding
 import com.smallcake.temp.module.MobileViewModule
@@ -13,8 +14,8 @@ import com.smallcake.temp.utils.BottomNavUtils
 
 class MainActivity : BaseBindActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?, bar: NavigationBar) {
+        bar.hide()
         initView()
         onEvent()
     }
@@ -42,6 +43,8 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
 
 
     }
+
+
 
 
 }

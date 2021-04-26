@@ -1,8 +1,11 @@
 package com.smallcake.temp.base
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
 import com.dylanc.viewbinding.inflateBindingWithGeneric
+import com.smallcake.smallutils.text.NavigationBar
+import com.smallcake.temp.R
 
 
 abstract class BaseBindActivity<VB:ViewBinding>: BaseActivity() {
@@ -11,6 +14,13 @@ abstract class BaseBindActivity<VB:ViewBinding>: BaseActivity() {
         super.onCreate(savedInstanceState)
         bind = inflateBindingWithGeneric(layoutInflater)
         setContentView(bind.root)
+        //导航栏设置
+        val bar = NavigationBar(this)
+        bar.setLayoutId(R.layout.android_navigation_bar)
+        bar.setBackgroundColor(Color.WHITE,true)
+        bar.backImageView?.setOnClickListener{finish()}
+        onCreate(savedInstanceState,bar)
     }
+    abstract fun onCreate(savedInstanceState: Bundle?,bar:NavigationBar)
 
 }

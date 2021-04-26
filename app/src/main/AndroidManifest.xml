@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TempAndroid"
         tools:targetApi="n">
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity"/>
 
         <meta-data
             android:name="android.max_aspect"
