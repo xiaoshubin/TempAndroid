@@ -12,7 +12,7 @@ class TestActivity : BaseBindActivity<ActivityTestBinding>() {
 
 
     override fun onCreate(savedInstanceState: Bundle?,bar: NavigationBar) {
-
+        bar.setTitle("测试")
         val mobileViewModule:MobileViewModule by viewModels()
         bind.lifecycleOwner = this
         bind.viewmodel = mobileViewModule
