@@ -21,6 +21,7 @@ abstract class BaseBindActivity<VB:ViewBinding>: BaseActivity() {
         //导航栏设置
         val bar = NavigationBar(this)
         bar.setBackgroundColor(Color.WHITE,true)
+        bar.backImageView?.setImageResource(R.mipmap.ic_back)
         bar.backImageView?.setOnClickListener{finish()}
         onCreate(savedInstanceState,bar)
         //调试器
