@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.dylanc.viewbinding.inflateBindingWithGeneric
+import com.smallcake.smallutils.ResourceUtils
 import com.smallcake.smallutils.text.NavigationBar
 import com.smallcake.temp.HttpDebug
 import com.smallcake.temp.R
+import com.smallcake.temp.utils.ldd
 
 
 abstract class BaseBindActivity<VB:ViewBinding>: BaseActivity() {

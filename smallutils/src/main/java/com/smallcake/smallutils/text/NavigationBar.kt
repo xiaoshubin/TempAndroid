@@ -22,7 +22,7 @@ import com.smallcake.smallutils.StatusBar.setTextColor
  * Describe:核心标题栏
  * 使用：
     val bar = NavigationBar(this)
-    bar.setLayoutId(R.layout.navigation_bar)
+    bar.setLayoutId(R.layout.navigation_bar)//可选
  * 注意:
  * 1.自定义的R.layout.navigation_bar的xml需要包含
  * android:id="@+id/navigation_bar"  FrameLayout
