@@ -86,9 +86,7 @@ object StringUtils {
         val s = SimpleDateFormat("yyyy-MM-dd")
         try {
             if (gc[Calendar.YEAR] - strYear.toInt() > 150
-                || gc.time.time - s.parse(
-                    "$strYear-$strMonth-$strDay"
-                ).time < 0
+                || gc.time.time - s.parse("$strYear-$strMonth-$strDay").time < 0
             ) {
                 errorInfo = "身份证生日不在有效范围。"
                 return false
@@ -210,6 +208,13 @@ object StringUtils {
             isEmail = true
         }
         return isEmail
+    }
+
+    /**
+     * 是否是空
+     */
+    fun isNull(content: String?): Boolean {
+        return content == null || content.isEmpty() || content.toLowerCase(Locale.ROOT) == "null"
     }
 
 
