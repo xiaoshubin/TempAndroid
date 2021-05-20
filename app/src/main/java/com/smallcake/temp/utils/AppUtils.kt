@@ -3,6 +3,8 @@
 package com.smallcake.temp.utils
 
 import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -63,6 +65,18 @@ object AppUtils {
             intent.setDataAndType(uri, "application/vnd.android.package-archive")
         }
         activity.startActivity(intent)
+    }
+
+    /**
+     * 获取进程名称
+     */
+    private fun getProcessName(context: Context, pid:Int):String?{
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningApps = am.runningAppProcesses ?: return null
+        for (runningApp in runningApps) {
+            if (runningApp.pid==pid)return runningApp.processName
+        }
+        return null
     }
 
 }

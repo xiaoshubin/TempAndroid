@@ -1,3 +1,5 @@
+package com.smallcake.smallutils
+
 import android.app.AppOpsManager
 import android.app.Notification
 import android.content.Context
@@ -15,12 +17,12 @@ object PermissUtils {
     /**
      * 检测是否开启【通知权限】
      * 使用：
-    if (PermissUtils.isNotificationsEnabled(this)){
+    if (com.smallcake.smallutils.PermissUtils.isNotificationsEnabled(this)){
     AlertDialog.Builder(this)
     .setTitle("提示")
     .setMessage("未开启通知权限,去开启？")
     .setNegativeButton("确定") { _, _ ->
-    PermissUtils.goNotificationsSetPage(this)
+    com.smallcake.smallutils.PermissUtils.goNotificationsSetPage(this)
     }
     .setPositiveButton("取消",null)
     .show()
