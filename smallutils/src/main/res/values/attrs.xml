@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--可伸缩文本控件-->
     <declare-styleable name="ExpandableTextView">
         <attr format="integer" name="maxCollapsedLines"/>
         <attr format="integer" name="animDuration"/>
@@ -13,5 +14,45 @@
     <declare-styleable name="CompanyEdittext">
         <attr name="ce_text" format="string" />
         <attr name="ce_text_color" format="color" />
+    </declare-styleable>
+
+    <!--自定义圆角图形按钮-->
+    <declare-styleable name="ShapeTextButton">
+        <!--填充颜色-->
+        <attr name="stb_solidColor" format="color"/>
+        <!--线条颜色-->
+        <attr name="stb_strokeColor" format="color"/>
+        <!--线条宽度-->
+        <attr name="stb_strokeWidth" format="integer" />
+        <!--半径-->
+        <attr name="stb_radius" format="dimension"/>
+        <!--上部左边半径-->
+        <attr name="stb_topLeftRadius"  format="dimension"/>
+        <!--上部右边半径-->
+        <attr name="stb_topRightRadius"  format="dimension"/>
+        <!--底部左边半径-->
+        <attr name="stb_bottomLeftRadius"  format="dimension"/>
+        <!--底部右边半径-->
+        <attr name="stb_bottomRightRadius"  format="dimension"/>
+        <!--图形-->
+        <attr name="stb_shape" format="integer">
+            <!--矩形-->
+            <enum name="rectangle" value="0"/>
+            <!--椭圆-->
+            <enum name="oval" value="1"/>
+            <!--线条-->
+            <enum name="line" value="2"/>
+            <!--圆圈-->
+            <enum name="ring" value="2"/>
+        </attr>
+        <!--状态类型-->
+        <attr name="stb_state" format="integer">
+            <!--文本-->
+            <enum name="text" value="1"/>
+            <!--按钮-->
+            <enum name="button" value="0"/>
+        </attr>
+        <!--饱和度-->
+        <attr name="stb_saturation" format="float" />
     </declare-styleable>
 </resources>

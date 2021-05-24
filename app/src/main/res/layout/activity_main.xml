@@ -86,6 +86,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <com.smallcake.smallutils.text.ShapeTextButton
+            app:stb_radius="8dp"
+            app:stb_solidColor="#ff0000"
+            android:text="按钮"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
