@@ -1,20 +1,15 @@
-package com.smallcake.smallutils.text;
+package com.smallcake.smallutils.text
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
-import android.util.AttributeSet;
-import android.view.Gravity;
-
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import com.smallcake.smallutils.R;
-
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.StateListDrawable
+import android.os.Build
+import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.graphics.drawable.DrawableCompat
+import com.smallcake.smallutils.R
 
 /**
  * 此控件主要是为了方便不写xml的shape
@@ -25,132 +20,181 @@ import com.smallcake.smallutils.R;
  * @see com.smallcake.smallutils.ShapeCreator
  * 的动态添加，好处就是可以及时预览
  */
-public class ShapeTextButton extends AppCompatTextView {
+class ShapeTextButton : AppCompatTextView {
 
     /**
-     * 文本状态
+     * 设置状态
+     *
+     * @param state [.STATE_TEXT] or [.STATE_BUTTON]
      */
-    public static final int STATE_TEXT = 1;
-    /**
-     * 按钮状态
-     */
-    public static final int STATE_BUTTON = 0;
-    /**
-     * 填充颜色
-     */
-    private int solid = Color.LTGRAY;
-    /**
-     * 线条宽度
-     */
-    private int strokeWidth = 0;
-    /**
-     * 线条颜色
-     */
-    private int strokeColor = Color.LTGRAY;
-    /**
-     * 图形
-     */
-    private int shape = 0;
-    /**
-     * 状态
-     */
-    private int state = STATE_BUTTON;
-    /**
-     * 圆角
-     */
-    private float radius = 0;
-    /**
-     * 左上圆角
-     */
-    private float topLeftRadius = 0;
-    /**
-     * 右上圆角
-     */
-    private float topRightRadius = 0;
-    /**
-     * 左下圆角
-     */
-    private float bottomLeftRadius = 0;
-    /**
-     * 右下圆角
-     */
-    private float bottomRightRadius = 0;
-    /**
-     * 饱和度
-     */
-    private float saturation = 0.25f;
-    /**
-     * 默认背景
-     */
-    private Drawable normalDrawable;
-    /**
-     * 按钮背景
-     */
-    private Drawable pressedDrawable;
+    var state = STATE_BUTTON
 
+    /**
+     * 获取填充颜色
+     *
+     * @return
+     */
+    var solid = Color.LTGRAY //填充颜色
+        private set
 
-    public ShapeTextButton(Context context) {
-        super(context);
-        initAttrs(context, null);
+    /**
+     * 获取线宽
+     *
+     * @return
+     */
+    var strokeWidth = 0 //线条宽度
+        private set
+
+    /**
+     * 获取线颜色
+     *
+     * @return
+     */
+    var strokeColor = Color.LTGRAY //线条颜色
+        private set
+
+    /**
+     * 获取图形
+     *
+     * @return
+     */
+    var shape = 0 //图形样式
+        private set
+
+    /**
+     * 获取半径
+     *
+     * @return
+     */
+    var radius = 0f //圆角大小
+        private set
+
+    /**
+     * 获取顶部左边圆角
+     *
+     * @return
+     */
+    var topLeftRadius = 0f //左上圆角
+        private set
+
+    /**
+     * 获取顶部右边圆角
+     *
+     * @return
+     */
+    var topRightRadius = 0f //右上圆角
+        private set
+
+    /**
+     * 获取底部左边圆角
+     *
+     * @return
+     */
+    var bottomLeftRadius = 0f //左下圆角
+        private set
+
+    /**
+     * 获取底部左边圆角
+     *
+     * @return
+     */
+    var bottomRightRadius = 0f //右下圆角
+        private set
+
+    /**
+     * 获取饱和度
+     *
+     * @return
+     */
+    var saturation = 0.25f //饱和度，确定按下后的颜色值
+        private set
+    private var normalDrawable //默认背景
+            : Drawable? = null
+    private var pressedDrawable //按钮背景
+            : Drawable? = null
+
+    constructor(context: Context) : super(context) {
+        initAttrs(context, null)
     }
 
-    public ShapeTextButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initAttrs(context, attrs);
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        initAttrs(context, attrs)
     }
 
-    public ShapeTextButton(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initAttrs(context, attrs);
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        initAttrs(context, attrs)
     }
 
-    private void initAttrs(Context context, AttributeSet attrs) {
+    private fun initAttrs(context: Context, attrs: AttributeSet?) {
         if (attrs != null) {
-            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShapeTextButton);
-            solid = typedArray.getColor(R.styleable.ShapeTextButton_stb_solidColor, solid);
-            strokeWidth = typedArray.getInt(R.styleable.ShapeTextButton_stb_strokeWidth, strokeWidth);
-            strokeColor = typedArray.getColor(R.styleable.ShapeTextButton_stb_strokeColor, strokeColor);
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShapeTextButton)
+            solid = typedArray.getColor(R.styleable.ShapeTextButton_stb_solidColor, solid)
+            strokeWidth =
+                typedArray.getInt(R.styleable.ShapeTextButton_stb_strokeWidth, strokeWidth)
+            strokeColor =
+                typedArray.getColor(R.styleable.ShapeTextButton_stb_strokeColor, strokeColor)
             if (typedArray.getString(R.styleable.ShapeTextButton_stb_shape) != null) {
-                shape = Integer.parseInt(typedArray.getString(R.styleable.ShapeTextButton_stb_shape));
+                shape = typedArray.getString(R.styleable.ShapeTextButton_stb_shape)!!.toInt()
             }
-            state = typedArray.getInt(R.styleable.ShapeTextButton_stb_state, state);
-            radius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_radius, 0);
-            topLeftRadius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_topLeftRadius, 0);
-            topRightRadius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_topRightRadius, 0);
-            bottomLeftRadius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_bottomLeftRadius, 0);
-            bottomRightRadius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_bottomRightRadius, 0);
-            saturation = typedArray.getFloat(R.styleable.ShapeTextButton_stb_saturation, 0.90f);
-            typedArray.recycle();
+            state = typedArray.getInt(R.styleable.ShapeTextButton_stb_state, state)
+            radius = typedArray.getDimension(R.styleable.ShapeTextButton_stb_radius, 0f)
+            topLeftRadius =
+                typedArray.getDimension(R.styleable.ShapeTextButton_stb_topLeftRadius, 0f)
+            topRightRadius =
+                typedArray.getDimension(R.styleable.ShapeTextButton_stb_topRightRadius, 0f)
+            bottomLeftRadius =
+                typedArray.getDimension(R.styleable.ShapeTextButton_stb_bottomLeftRadius, 0f)
+            bottomRightRadius =
+                typedArray.getDimension(R.styleable.ShapeTextButton_stb_bottomRightRadius, 0f)
+            saturation = typedArray.getFloat(R.styleable.ShapeTextButton_stb_saturation, 0.90f)
+            typedArray.recycle()
         }
-        drawDrawable();
+        drawDrawable()
     }
 
     /**
      * 绘制Drawable
      */
-    protected void drawDrawable() {
-        normalDrawable = createShape(shape, strokeWidth, strokeColor, solid, radius, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius);
-        pressedDrawable = createShape(shape, strokeWidth, createPressedColor(strokeColor), createPressedColor(solid), radius, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius);
-        int[][] states = new int[2][];
-        states[0] = new int[]{-android.R.attr.state_pressed};
+    protected fun drawDrawable() {
+        normalDrawable = createShape(
+            shape,
+            strokeWidth,
+            strokeColor,
+            solid,
+            radius,
+            topLeftRadius,
+            topRightRadius,
+            bottomLeftRadius,
+            bottomRightRadius
+        )
+        pressedDrawable = createShape(
+            shape, strokeWidth, createPressedColor(strokeColor), createPressedColor(
+                solid
+            ), radius, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius
+        )
+        val states = arrayOfNulls<IntArray>(2)
+        states[0] = intArrayOf(-android.R.attr.state_pressed)
         if (state == STATE_BUTTON) {
-            states[1] = new int[]{android.R.attr.state_pressed};
+            states[1] = intArrayOf(android.R.attr.state_pressed)
         }
         if (state == STATE_TEXT) {
-            states[1] = new int[]{-android.R.attr.state_pressed};
+            states[1] = intArrayOf(-android.R.attr.state_pressed)
         }
-        StateListDrawable stateListDrawable = new StateListDrawable();
-        stateListDrawable.addState(states[0], normalDrawable);
+        val stateListDrawable = StateListDrawable()
+        stateListDrawable.addState(states[0], normalDrawable)
         if (state == STATE_BUTTON) {
-            stateListDrawable.addState(states[1], pressedDrawable);
+            stateListDrawable.addState(states[1], pressedDrawable)
         }
         if (state == STATE_TEXT) {
-            stateListDrawable.addState(states[1], normalDrawable);
+            stateListDrawable.addState(states[1], normalDrawable)
         }
-        Drawable wrapDrawable = DrawableCompat.wrap(stateListDrawable);
-        setDrawable(wrapDrawable);
+        val wrapDrawable = DrawableCompat.wrap(stateListDrawable)
+        setDrawable(wrapDrawable)
     }
-
 
     /**
      * 使用HSV创建按下状态颜色
@@ -159,14 +203,13 @@ public class ShapeTextButton extends AppCompatTextView {
      * @param color
      * @return
      */
-    private int createPressedColor(int color) {
-        int alpha = Color.alpha(color);
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] *= saturation;
-        return Color.HSVToColor(alpha, hsv);
+    private fun createPressedColor(color: Int): Int {
+        val alpha = Color.alpha(color)
+        val hsv = FloatArray(3)
+        Color.colorToHSV(color, hsv)
+        hsv[2] *= saturation
+        return Color.HSVToColor(alpha, hsv)
     }
-
 
     /**
      * 适用于所有android api
@@ -174,14 +217,9 @@ public class ShapeTextButton extends AppCompatTextView {
      *
      * @param drawable
      */
-    private void setDrawable(Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(drawable);
-        } else {
-            setBackgroundDrawable(drawable);
-        }
+    private fun setDrawable(drawable: Drawable) {
+       background = drawable
     }
-
 
     /**
      * 创建Shape
@@ -198,221 +236,142 @@ public class ShapeTextButton extends AppCompatTextView {
      * @param bottomRightRadius 底右圆角 bottom right corner radius
      * @return
      */
-    public Drawable createShape(int shape, int strokeWidth,
-                                int strokeColor, int solidColor, float cornerRadius,
-                                float topLeftRadius, float topRightRadius,
-                                float bottomLeftRadius, float bottomRightRadius) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(shape);
-        drawable.setSize(10, 10);
-        drawable.setStroke(strokeWidth, strokeColor);
-        drawable.setColor(solidColor);
-        if (cornerRadius != 0) {
-            drawable.setCornerRadius(cornerRadius);
+    fun createShape(
+        shape: Int, strokeWidth: Int,
+        strokeColor: Int, solidColor: Int, cornerRadius: Float,
+        topLeftRadius: Float, topRightRadius: Float,
+        bottomLeftRadius: Float, bottomRightRadius: Float
+    ): Drawable {
+        val drawable = GradientDrawable()
+        drawable.shape = shape
+        drawable.setSize(10, 10)
+        drawable.setStroke(strokeWidth, strokeColor)
+        drawable.setColor(solidColor)
+        if (cornerRadius != 0f) {
+            drawable.cornerRadius = cornerRadius
         } else {
-            drawable.setCornerRadii(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomRightRadius, bottomRightRadius,bottomLeftRadius, bottomLeftRadius});
+            drawable.cornerRadii = floatArrayOf(
+                topLeftRadius,
+                topLeftRadius,
+                topRightRadius,
+                topRightRadius,
+                bottomRightRadius,
+                bottomRightRadius,
+                bottomLeftRadius,
+                bottomLeftRadius
+            )
         }
-        return drawable;
-    }
-
-    /**
-     * 获取填充颜色
-     *
-     * @return
-     */
-    public int getSolid() {
-        return solid;
+        return drawable
     }
 
     /**
      * 设置填充颜色
      *
-     * @param solid
+     * @param stb_solidColor
      */
-    public void setSolid(int solid) {
-        this.solid = solid;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取线宽
-     *
-     * @return
-     */
-    public int getStrokeWidth() {
-        return strokeWidth;
+    fun setStb_solidColor(stb_solidColor: Int) {
+        solid = stb_solidColor
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置线宽
      *
-     * @param strokeWidth
+     * @param stb_strokeWidth
      */
-    public void setStrokeWidth(int strokeWidth) {
-        this.strokeWidth = strokeWidth;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取线颜色
-     *
-     * @return
-     */
-    public int getStrokeColor() {
-        return strokeColor;
+    fun setStb_strokeWidth(stb_strokeWidth: Int) {
+        strokeWidth = stb_strokeWidth
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置线颜色
      *
-     * @param strokeColor
+     * @param stb_strokeColor
      */
-    public void setStrokeColor(int strokeColor) {
-        this.strokeColor = strokeColor;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取图形
-     *
-     * @return
-     */
-    public int getShape() {
-        return shape;
+    fun setStb_strokeColor(stb_strokeColor: Int) {
+        strokeColor = stb_strokeColor
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置图形
      *
-     * @param shape {@link GradientDrawable#RECTANGLE}  or {@link GradientDrawable#OVAL}
+     * @param stb_shape [GradientDrawable.RECTANGLE]  or [GradientDrawable.OVAL]
      */
-    public void setShape(int shape) {
-        this.shape = shape;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取半径
-     *
-     * @return
-     */
-    public float getRadius() {
-        return radius;
+    fun setStb_shape(stb_shape: Int) {
+        shape = stb_shape
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置四个方向圆角
      *
-     * @param radius
+     * @param stb_radius
      */
-    public void setRadius(float radius) {
-        this.radius = radius;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取顶部左边圆角
-     *
-     * @return
-     */
-    public float getTopLeftRadius() {
-        return topLeftRadius;
+    fun setStb_radius(stb_radius: Float) {
+        radius = stb_radius
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置顶部左边圆角
      *
-     * @param topLeftRadius
+     * @param stb_topLeftRadius
      */
-    public void setTopLeftRadius(float topLeftRadius) {
-        this.topLeftRadius = topLeftRadius;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取顶部右边圆角
-     *
-     * @return
-     */
-    public float getTopRightRadius() {
-        return topRightRadius;
+    fun setStb_topLeftRadius(stb_topLeftRadius: Float) {
+        topLeftRadius = stb_topLeftRadius
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置顶部右边圆角
      *
-     * @param topRightRadius
+     * @param stb_topRightRadius
      */
-    public void setTopRightRadius(float topRightRadius) {
-        this.topRightRadius = topRightRadius;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取底部左边圆角
-     *
-     * @return
-     */
-    public float getBottomLeftRadius() {
-        return bottomLeftRadius;
+    fun setStb_topRightRadius(stb_topRightRadius: Float) {
+        topRightRadius = stb_topRightRadius
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置底部左边圆角
      *
-     * @param bottomLeftRadius
+     * @param stb_bottomLeftRadius
      */
-    public void setBottomLeftRadius(float bottomLeftRadius) {
-        this.bottomLeftRadius = bottomLeftRadius;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取底部左边圆角
-     *
-     * @return
-     */
-    public float getBottomRightRadius() {
-        return bottomRightRadius;
+    fun setStb_bottomLeftRadius(stb_bottomLeftRadius: Float) {
+        bottomLeftRadius = stb_bottomLeftRadius
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置底部右边圆角
      *
-     * @param bottomRightRadius
+     * @param stb_bottomRightRadius
      */
-    public void setBottomRightRadius(float bottomRightRadius) {
-        this.bottomRightRadius = bottomRightRadius;
-        drawDrawable();
-        invalidate();
-    }
-
-    /**
-     * 获取饱和度
-     *
-     * @return
-     */
-    public float getSaturation() {
-        return saturation;
+    fun setStb_bottomRightRadius(stb_bottomRightRadius: Float) {
+        bottomRightRadius = stb_bottomRightRadius
+        drawDrawable()
+        invalidate()
     }
 
     /**
      * 设置饱和度
      *
-     * @param saturation
+     * @param stb_saturation
      */
-    public void setSaturation(float saturation) {
-        this.saturation = saturation;
-        drawDrawable();
-        invalidate();
+    fun setStb_saturation(stb_saturation: Float) {
+        saturation = stb_saturation
+        drawDrawable()
+        invalidate()
     }
 
     /**
@@ -420,8 +379,8 @@ public class ShapeTextButton extends AppCompatTextView {
      *
      * @return
      */
-    public Drawable getNormalDrawable() {
-        return normalDrawable;
+    fun getNormalDrawable(): Drawable? {
+        return normalDrawable
     }
 
     /**
@@ -429,10 +388,10 @@ public class ShapeTextButton extends AppCompatTextView {
      *
      * @param normalDrawable
      */
-    public void setNormalDrawable(Drawable normalDrawable) {
-        this.normalDrawable = normalDrawable;
-        drawDrawable();
-        invalidate();
+    fun setNormalDrawable(normalDrawable: Drawable?) {
+        this.normalDrawable = normalDrawable
+        drawDrawable()
+        invalidate()
     }
 
     /**
@@ -440,8 +399,8 @@ public class ShapeTextButton extends AppCompatTextView {
      *
      * @return
      */
-    public Drawable getPressedDrawable() {
-        return pressedDrawable;
+    fun getPressedDrawable(): Drawable? {
+        return pressedDrawable
     }
 
     /**
@@ -449,28 +408,14 @@ public class ShapeTextButton extends AppCompatTextView {
      *
      * @param pressedDrawable
      */
-    public void setPressedDrawable(Drawable pressedDrawable) {
-        this.pressedDrawable = pressedDrawable;
-        drawDrawable();
-        invalidate();
+    fun setPressedDrawable(pressedDrawable: Drawable?) {
+        this.pressedDrawable = pressedDrawable
+        drawDrawable()
+        invalidate()
     }
 
-    /**
-     * 获取状态
-     *
-     * @return
-     */
-    public int getState() {
-        return state;
+    companion object {
+        const val STATE_TEXT = 1 //文本状态
+        const val STATE_BUTTON = 0 //按钮状态
     }
-
-    /**
-     * 设置状态
-     *
-     * @param state {@link #STATE_TEXT} or {@link #STATE_BUTTON}
-     */
-    public void setState(int state) {
-        this.state = state;
-    }
-
 }

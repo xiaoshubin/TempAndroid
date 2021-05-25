@@ -88,7 +88,8 @@
 
         <com.smallcake.smallutils.text.ShapeTextButton
             app:stb_radius="8dp"
-            app:stb_solidColor="#ff0000"
+            app:stb_solidColor="@{user.id!=0?@color/red:@color/yellow}"
+            tools:stb_solidColor="@color/red"
             android:text="按钮"
             android:gravity="center"
             android:layout_width="match_parent"
