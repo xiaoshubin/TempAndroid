@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.graphics.drawable.DrawableCompat
 import com.smallcake.smallutils.R
@@ -151,6 +152,7 @@ class ShapeTextButton : AppCompatTextView {
             bottomRightRadius =
                 typedArray.getDimension(R.styleable.ShapeTextButton_stb_bottomRightRadius, 0f)
             saturation = typedArray.getFloat(R.styleable.ShapeTextButton_stb_saturation, 0.90f)
+            gravity = Gravity.CENTER
             typedArray.recycle()
         }
         drawDrawable()
