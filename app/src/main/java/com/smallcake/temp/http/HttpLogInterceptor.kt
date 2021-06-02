@@ -6,6 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
+import java.io.IOException
 import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
 
@@ -14,7 +15,7 @@ class HttpLogInterceptor : Interceptor {
             val request = chain.request()
             val startNs = System.nanoTime()//请求发起的时间
             if (request.method == "POST") {
-                if (BuildConfig.DEBUG)Log.d("SmallOkHttp>>>", "【${request.method}】发送请求 ${request.url}====================================参数开始==============================================${logParams(request)}====================================参数结束==============================================")
+                if (BuildConfig.DEBUG)Log.d("SmallOkHttp>>>", "【${request.method}】发送请求 ${request.url}\n====================================参数开始==============================================\n${logParams(request)}\n====================================参数结束==============================================")
             } else {
                 if (BuildConfig.DEBUG)Log.d("SmallOkHttp>>>","【${request.method}】发送请求 ${request.url}")
             }
@@ -23,7 +24,7 @@ class HttpLogInterceptor : Interceptor {
                 response = chain.proceed(request)
             } catch (e: Exception) {
                 Log.e("SmallOkHttp>>>","<-- HTTP FAILED: $e")
-                throw e
+                throw IOException("$e")
             }
             val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
             //这里不能直接使用response.body().string()的方式输出日志

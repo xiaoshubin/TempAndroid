@@ -10,7 +10,9 @@ import com.smallcake.temp.api.WeatherImpl
 import com.smallcake.temp.base.Constant
 import com.smallcake.temp.http.DataProvider
 import com.smallcake.temp.http.HttpLogInterceptor
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.koin.core.component.KoinApiExtension
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
@@ -37,14 +39,15 @@ val httpModule = module {
 
 
     //公共头部拦截器
-//    val haveHeader = false
-//    if (haveHeader)okHttpClientBuilder.addInterceptor(Interceptor{
-//        val request: Request = it.request()
-//            .newBuilder()
-//            .addHeader("Authorization", "Bearer")
-//            .build()
-//         it.proceed(request)
-//    })
+
+    okHttpClientBuilder.addInterceptor(Interceptor{
+    val request: Request = it.request()
+        .newBuilder()
+        .addHeader("Content-Type", "application/json;charset=UTF-8")
+//        .addHeader("token", SpUtil.getToken()?:"")
+        .build()
+        it.proceed(request)
+    })
 
     val okHttpClient = okHttpClientBuilder.build()
 
