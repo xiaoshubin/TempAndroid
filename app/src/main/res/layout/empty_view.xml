@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_gravity="center"
+            android:src="@android:mipmap/sym_def_app_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginBottom="@dimen/dp_24"
+            android:id="@+id/tv"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            tools:text="暂无数据"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.smallcake.smallutils.text.ShapeTextButton
+            android:id="@+id/btn"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textColor="@color/white"
+            app:stb_solidColor="@color/dodgerblue"
+            app:stb_radius="@dimen/dp_20"
+            android:text="开始安全培训"
+            android:layout_margin="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40" />
+    </LinearLayout>
+</layout>
