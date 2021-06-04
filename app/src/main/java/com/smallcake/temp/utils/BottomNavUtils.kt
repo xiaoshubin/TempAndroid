@@ -17,7 +17,6 @@ import com.smallcake.temp.R
 import com.smallcake.temp.fragment.HomeFragment
 import com.smallcake.temp.fragment.ListFragment
 import com.smallcake.temp.fragment.MineFragment
-import com.smallcake.temp.listener.BottomNavListener
 
 /**
  * Date: 2020/8/17
@@ -43,7 +42,7 @@ object BottomNavUtils {
         R.mipmap.icon_unselected_tab3
     )
     private val tabNames = arrayOf("首页", "列表", "我的")
-    private var listener : BottomNavListener?=null
+    private var listener : ((Int)->Unit)?=null
     fun tabBindViewPager(
         activity: AppCompatActivity,
         tabLayout: LinearLayout,
@@ -89,7 +88,7 @@ object BottomNavUtils {
             override fun onPageScrolled(position: Int,positionOffset: Float,positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 toDefaultTab(position, tabLayout)
-                listener?.OnNavSelect(position)
+                listener?.invoke(position)
             }
         })
     }
@@ -155,7 +154,7 @@ object BottomNavUtils {
         animator.start()
     }
 
-     fun setListener(listener:BottomNavListener?){
+     fun setListener(listener:((Int)->Unit)?){
         this.listener = listener
     }
 
