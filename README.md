@@ -341,3 +341,29 @@ class DataProvider :KoinComponent {
 
 
 
+######7.文件加字段混合上传
+
+​	1.定义接口
+
+```
+    @Multipart
+    @POST("commonApi/common/demoFile")
+    fun demoFile(@PartMap map:HashMap<String, RequestBody> , @Part file:MultipartBody.Part): Observable<BaseResponse<String>>
+```
+
+2.实现
+
+```kotlin
+        val picSavePath = "/storage/emulated/0/Android/data/com.yx.driver.training/cache/1622801781841719.jpeg"
+        val file = File(picSavePath)
+        val fileRQ: RequestBody = File(picSavePath).asRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val part: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, fileRQ)
+        val map = HashMap<String, RequestBody>().apply {
+            put("name", "xiao".toRbForm())
+            put("phone", "13800138000".toRbForm())
+        }
+        dataProvider.common.demoFile(map, part)
+            .bindLife(provider)
+            .sub({})
+```
+
