@@ -5,29 +5,17 @@ plugins {
     id "koin"
     id "kotlin-parcelize"
 }
-def keystorePSW = ""
-def keystoreAlias = ""
-def keystoreAliasPSW = ""
-Properties properties = new Properties()
-properties.load(project.rootProject.file("local.properties").newDataInputStream())
-def keystoreFilepath = properties.getProperty("keystore.path")
-def keyfile = ""
-if (keystoreFilepath) {
-    keystorePSW = properties.getProperty("keystore.password")
-    keystoreAlias = properties.getProperty("keystore.alias")
-    keystoreAliasPSW = properties.getProperty("keystore.alias_password")
-    keyfile = file(keystoreFilepath)
-}
+
 static def releaseTime() {
     return new Date().format("yyyyMMddHHmmss")
 }
 android {
     signingConfigs {
         release {
-            keyAlias keystoreAlias
-            keyPassword keystoreAliasPSW
-            storeFile keyfile
-            storePassword keystorePSW
+            keyAlias 'xiao'
+            keyPassword '888888'
+            storeFile file('../smallcake.jks')
+            storePassword '888888'
         }
     }
     compileSdkVersion 30

@@ -6,15 +6,7 @@
 
 # 配置项
 
-1. 配置签名：`signingConfigs`需要你在本地的配置文件`local.properties`中设置打包密钥配置【需自行添加如下】，不然项目构建会报错,这样不管打正式包和debug包，都是一种签名文件，不会出现签名不同包名相同的错误，方便调试。
-
-```keystore.path =D\:\\mykey.jks
-keystore.path =D\:\\mykey.jks
-keystore.password = 123456
-keystore.alias = myalias
-keystore.alias_password = 123456
-```
-
+1. 配置签名：`signingConfigs`  添加了一个smallcake.jks ，替换自己的签名文件
 2. 配置网络：访问https,避免Anroid9+的手机无法访问http接口，只能访问https接口
 
 3. 配置导航栏：使用自定义NavigationBar的方式设置通用导航栏
