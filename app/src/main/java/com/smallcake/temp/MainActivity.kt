@@ -7,6 +7,7 @@ import coil.load
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.smallcake.smallutils.CameraUtils
+import com.smallcake.smallutils.MediaUtils
 import com.smallcake.smallutils.ShapeCreator
 import com.smallcake.smallutils.text.NavigationBar
 import com.smallcake.temp.base.BaseBindActivity
@@ -30,7 +31,7 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
             goActivity(TestActivity::class.java)
         }
         bind.btnGet2.setOnClickListener{
-//            MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
+            MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
 
 
 
