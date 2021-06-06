@@ -1,15 +1,12 @@
 package com.smallcake.temp
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.viewModels
 import coil.load
-import com.lxj.xpopup.XPopup
-import com.lxj.xpopup.interfaces.OnConfirmListener
-import com.smallcake.smallutils.MediaUtils
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
+import com.smallcake.smallutils.CameraUtils
 import com.smallcake.smallutils.ShapeCreator
 import com.smallcake.smallutils.text.NavigationBar
 import com.smallcake.temp.base.BaseBindActivity
@@ -17,6 +14,7 @@ import com.smallcake.temp.bean.UserBean
 import com.smallcake.temp.databinding.ActivityMainBinding
 import com.smallcake.temp.module.MobileViewModule
 import com.smallcake.temp.utils.BottomNavUtils
+import com.smallcake.temp.utils.ldd
 
 
 class MainActivity : BaseBindActivity<ActivityMainBinding>() {
@@ -32,8 +30,13 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
             goActivity(TestActivity::class.java)
         }
         bind.btnGet2.setOnClickListener{
-            MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
+//            MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
+
+
+
+
         }
+
     }
 
     private fun initView() {
