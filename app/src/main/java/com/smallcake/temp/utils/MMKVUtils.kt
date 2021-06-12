@@ -8,6 +8,13 @@ import java.util.*
 /**
  * MMKV存储数据工具类
  *
+ * 如何保存一个对象列表？
+ * @Parcelize data class Car(val carId: Int,val carNo: String):Parcelable
+ * @Parcelize data class CarList(var cardList:List<CardListBean>):Parcelable
+ * 保存
+ * encodeParcelable("cardList",CarList())
+ * 读取
+ * val carList:CarList = decodeParcelable("cardList",CarList::calss.java)
  */
 object MMKVUtils {
     //You should Call MMKV.initialize() first.
@@ -18,7 +25,8 @@ object MMKVUtils {
      * @param key
      * @param obj
      * @remind 要保存的对象，只能保存实现了serializable的对象
-     * 建议使用 @{encodeParcelable(key: String?, obj: Parcelable?)}
+     * 建议使用
+     * @see encodeParcelable(key: String?, obj: Parcelable?)
      */
     @java.lang.Deprecated
     fun saveObject(key: String, obj: Any) {
@@ -49,6 +57,8 @@ object MMKVUtils {
      * 读取对象
      * @param key String
      * @return T
+     * 建议使用
+     * @see decodeParcelable(key: String?, obj: Parcelable?)
      */
     @java.lang.Deprecated
     fun <T : Any?> readObject(key: String): T? {
