@@ -16,7 +16,7 @@ class DragHelper(private val view: View) {
     private var downY = 0f//按下的y坐标
     private var isDraged = false //View是否被移动过
     private var isDrag = false //判断是拖动还是点击
-    private var topMargin = ScreenUtils.getStatusHeight() //判断是拖动还是点击
+    private var topMargin = Screen.getStatusHeight() //判断是拖动还是点击
 
     /**
      * 测量
@@ -24,8 +24,8 @@ class DragHelper(private val view: View) {
     fun onMeasure() {
         width = view.measuredWidth
         height = view.measuredHeight
-        maxWidth = ScreenUtils.getWidth()
-        maxHeight = ScreenUtils.getHeight() - DpPxUtils.dp2px(60f)-topMargin
+        maxWidth = Screen.width
+        maxHeight = Screen.height - DpPxUtils.dp2px(60f)-topMargin
     }
 
     /**

@@ -14,30 +14,38 @@ import androidx.annotation.FloatRange
 /**
  * 屏幕工具
  */
-object ScreenUtils {
+object Screen {
+
     /**
      * 获取屏幕实际高度（也包含虚拟导航栏）
      * @return
      */
-    fun getHeight(): Int {
-        val displayMetrics = DisplayMetrics()
-        val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-         windowManager.defaultDisplay.getRealMetrics(displayMetrics)
-        return displayMetrics.heightPixels
-    }
-    fun getWidth(): Int {
-        val displayMetrics = DisplayMetrics()
-        val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-         windowManager.defaultDisplay.getRealMetrics(displayMetrics)
-        return displayMetrics.widthPixels
-    }
+    val height: Int
+        get(){
+            val displayMetrics = DisplayMetrics()
+            val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+            return displayMetrics.heightPixels
+        }
+    /**
+     * 获取屏幕实际宽度
+     * @return
+     */
+    val width:Int
+        get(){
+            val displayMetrics = DisplayMetrics()
+            val windowManager = SmallUtils.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+            return displayMetrics.widthPixels
+        }
 
     /**
      * 获取电量栏高度
      *
      * @return
      */
-    fun getStatusHeight(): Int {
+    val statusHeight: Int
+    get(){
         var result = 0
         val resourceId: Int =SmallUtils.context?.resources?.getIdentifier("status_bar_height", "dimen", "android")?:24
         if (resourceId > 0) {
@@ -56,8 +64,8 @@ object ScreenUtils {
      */
     fun screenShot(activity: Activity,hasStatus:Boolean = true): Bitmap? {
         val view = activity.window.decorView
-        val width: Int = getWidth()
-        val height: Int = getHeight()
+        val width: Int = width
+        val height: Int = height
         view.isDrawingCacheEnabled = true
         view.buildDrawingCache()
         val bmp = view.drawingCache ?: return null

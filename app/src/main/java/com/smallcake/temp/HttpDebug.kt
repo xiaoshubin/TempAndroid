@@ -2,17 +2,11 @@ package com.smallcake.temp
 
 import android.content.Context
 import android.graphics.Color
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.ContentFrameLayout
-import com.orhanobut.logger.Logger
 import com.smallcake.smallutils.DpPxUtils
-import com.smallcake.smallutils.ScreenUtils
 import com.smallcake.smallutils.ShapeCreator
-import com.smallcake.temp.BuildConfig
-import com.smallcake.temp.R
 import com.smallcake.temp.utils.ldd
 import com.smallcake.temp.utils.showToast
 
