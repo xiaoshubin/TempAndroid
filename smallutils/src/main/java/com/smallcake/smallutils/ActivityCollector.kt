@@ -54,9 +54,12 @@ object ActivityCollector{
     /**
      * 获得栈中最顶层的Activity
      * 方便网络框架中跳登录页面
-    val topActivity = ActivityCollector.findTopActivity()
-    if (topActivity==null||topActivity==LoginActivity::class)return
-    topActivity.startActivity(Intent(topActivity, LoginActivity::class.java))
+        val topActivity = ActivityCollector.findTopActivity()
+        if (topActivity==null||topActivity==LoginActivity::class)return
+        val intent= Intent(topActivity, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP and Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        topActivity.startActivity(intent)
+     注意：LoginActivity的启动模式应设置为android:launchMode="singleTask"，否则会启动多个LoginActivity页面
      */
     fun findTopActivity(): AppCompatActivity?{
         val am = SmallUtils.context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
