@@ -18,11 +18,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class InvisibleFragment : Fragment() {
-    private var callback:((String) -> Unit)?=null
+    private var callback:((String?) -> Unit)?=null
     private val picSavePath = getFileName()
 
 
-    fun takePhotoNow(activity: FragmentActivity, cb:(String) -> Unit,cameraFacing: Boolean=false) {
+    fun takePhotoNow(activity: FragmentActivity, cb:(String?) -> Unit,cameraFacing: Boolean=false) {
         callback=cb
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (cameraFacing)intent.putExtra("android.intent.extras.CAMERA_FACING", 1)//调用前置摄像头
@@ -53,6 +53,8 @@ class InvisibleFragment : Fragment() {
         if (resultCode == RESULT_OK && requestCode ==CameraUtils. REQUEST_CAMERA) {
             Log.i("图片地址","picSavePath:$picSavePath")
             callback?.invoke(picSavePath)
+        }else{
+            callback?.invoke(null)
         }
     }
 }
