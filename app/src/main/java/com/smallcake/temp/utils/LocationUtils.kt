@@ -110,7 +110,10 @@ object LocationUtils {
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0f,
             object : LocationListener {
-                override fun onLocationChanged(location: Location) { listener.invoke(location)}
+                override fun onLocationChanged(location: Location) {
+                    listener.invoke(location)
+                    locationManager.removeUpdates(this)//定位成功后移除位置更新
+                }
                 override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
                 override fun onProviderEnabled(provider: String) {}
                 override fun onProviderDisabled(provider: String) {}
