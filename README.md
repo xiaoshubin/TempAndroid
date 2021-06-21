@@ -333,7 +333,7 @@ class DataProvider :KoinComponent {
 
 
 
-######7.文件加字段混合上传
+##### 7.文件加字段混合上传
 
 ​	1.定义接口
 
@@ -346,7 +346,7 @@ class DataProvider :KoinComponent {
 2.实现
 
 ```kotlin
-        val picSavePath = "/storage/emulated/0/Android/data/com.yx.driver.training/cache/1622801781841719.jpeg"
+        val picSavePath = "/storage/emulated/0/Android/data/com.smallcake.temp/cache/1622801781841719.jpeg"
         val file = File(picSavePath)
         val fileRQ: RequestBody = File(picSavePath).asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val part: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, fileRQ)
