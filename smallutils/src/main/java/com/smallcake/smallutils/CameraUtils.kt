@@ -42,6 +42,23 @@ object CameraUtils {
                 ldd("拍照后的地址为：$it")
                 },true)
             }
+        }
+
+     得到图片的地址后，也许我们还需要压缩，如果是用的鲁班压缩可以
+    private fun compressImg(picSavePath:String?) {
+        if (TextUtils.isEmpty(picSavePath)) return
+        Luban.with(this)
+            .load(picSavePath)
+            .ignoreBy(200)
+            .setTargetDir(externalCacheDir!!.path) //压缩后的图片保存到应用缓存目录
+            .setCompressListener(object : OnCompressListener {
+            override fun onStart() {}
+            override fun onSuccess(file: File) {
+                ldd("压缩后的图片大小为：${UnitFormatUtils.formatSize(this@GroupSetActivity,FileUtils.getFileSize(file))}")
+            }
+            override fun onError(e: Throwable) {}
+            })
+        .launch()
     }
      */
     fun takePhoto(activity: FragmentActivity, cb:(String?) -> Unit, cameraFacing: Boolean=false){
