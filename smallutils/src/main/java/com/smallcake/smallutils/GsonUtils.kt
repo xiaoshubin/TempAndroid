@@ -1,6 +1,7 @@
 package com.smallcake.smallutils
 
 import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
@@ -30,5 +31,15 @@ object GsonUtils {
     fun printList(param:List<Any>?){
         var jsonString = formatJson(Gson().toJson(param))
         Log.i("GsonUtils",jsonString)
+    }
+
+    /**
+     * 使用google的Gson失败了
+     * 使用fastjson把string转HashMap
+     * @param str String
+     * @return HashMap<String, String>
+     */
+    fun strToMap(str:String):HashMap<String, String>{
+        return JSON.parseObject(str,HashMap::class.java) as HashMap<String, String>
     }
 }

@@ -136,6 +136,20 @@ object TimeUtils {
             else -> ""
         }
     }
+    fun getDayofWeek(date: Date?): String {
+        val cal = Calendar.getInstance()
+        cal.time = Date(date?.time ?: 0)
+        return when (cal.get(Calendar.DAY_OF_WEEK)) {
+            1 -> "星期日"
+            2 -> "星期一"
+            3 -> "星期二"
+            4 -> "星期三"
+            5 -> "星期四"
+            6 -> "星期五"
+            7 -> "星期六"
+            else -> ""
+        }
+    }
     /**
      * 获取几天后的时间戳（秒）
      * @param day 几天后
