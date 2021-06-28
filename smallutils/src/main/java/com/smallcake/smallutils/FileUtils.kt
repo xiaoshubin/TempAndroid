@@ -15,6 +15,32 @@ import java.io.IOException
  **/
 object FileUtils {
     /**
+     * 如果文件不存在就创建它，否则什么也不做。
+     *
+     * @param file The file.
+     * @return {@code true}: exists or creates successfully<br>{@code false}: otherwise
+     */
+    fun createOrExistsFile(file: File?): Boolean {
+        if (file == null) return false
+        if (file.exists()) return file.isFile
+        return if (createOrExistsDir(file.parentFile)) false else try {
+            file.createNewFile()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    /**
+     * 如果文件夹不存在就创建它，否则什么也不做。
+     *
+     * @param file The file.
+     * @return `true`: exists or creates successfully<br></br>`false`: otherwise
+     */
+    fun createOrExistsDir(file: File?): Boolean {
+        return file != null && if (file.exists()) file.isDirectory else file.mkdirs()
+    }
+    /**
      * 创建文件夹,如果不存在的话
      * @param filePath
      * @return
@@ -76,5 +102,5 @@ object FileUtils {
         return size
     }
 
-    fun getFileSize(path:String?) = getFileSize(File(path))
+    fun getFileSize(path: String?) = getFileSize(File(path))
 }
