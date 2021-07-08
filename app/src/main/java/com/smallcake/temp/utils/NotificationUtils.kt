@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.smallcake.temp.MyApplication
@@ -21,21 +22,25 @@ object NotificationUtils {
     /**
      * 通知消息
      * @param msg
+     * 注意：setSmallIcon无效，可能是图片太大（最好32*32），或缓存（重启手机）
      */
-    fun showNotice(title:CharSequence = MyApplication.instance.getString(R.string.app_name),msg: CharSequence) {
-        val manager =
-            MyApplication.instance.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val builder: NotificationCompat.Builder
-        builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel =
-                NotificationChannel("1", title, NotificationManager.IMPORTANCE_LOW)
+    fun showNotice(
+        title: CharSequence = MyApplication.instance.getString(R.string.app_name),
+        msg: CharSequence
+    ) {
+        val manager = MyApplication.instance.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val builder: NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(AppUtils.getAppPackageName(), title, NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
             NotificationCompat.Builder(MyApplication.instance, "smallcake")
         } else {
             NotificationCompat.Builder(MyApplication.instance)
         }
+        val largeBitmap = BitmapFactory.decodeResource(MyApplication.instance.resources,R.mipmap.ic_launcher_round)
         val notification = builder
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setLargeIcon(largeBitmap)//大图，右侧的图标
+            .setSmallIcon(R.mipmap.ic_launcher_round)//必须添加（Android 8.0,最好32*32像素大小
+            .setChannelId(AppUtils.getAppPackageName())//必须添加（Android 8.0） 【唯一标识】
             .setContentTitle(title)
             .setWhen(System.currentTimeMillis())
             .setContentText(msg)
