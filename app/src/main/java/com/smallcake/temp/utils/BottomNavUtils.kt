@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.smallcake.temp.MyApplication
 import com.smallcake.temp.R
 import com.smallcake.temp.fragment.HomeFragment
 import com.smallcake.temp.fragment.ListFragment
@@ -42,6 +43,8 @@ object BottomNavUtils {
         R.mipmap.icon_unselected_tab3
     )
     private val tabNames = arrayOf("首页", "列表", "我的")
+    private val textColorNormal = ContextCompat.getColor(MyApplication.instance, R.color.gray)
+    private val textColorSelect = ContextCompat.getColor(MyApplication.instance, R.color.black)
     private var listener : ((Int)->Unit)?=null
     fun tabBindViewPager(
         activity: AppCompatActivity,
@@ -117,7 +120,7 @@ object BottomNavUtils {
             }
             //恢复默认字体颜色
             val tvTab = childAt.getChildAt(1) as TextView
-            tvTab.setTextColor(ContextCompat.getColor(tabLayout.context, R.color.gray))
+            tvTab.setTextColor(textColorNormal)
         }
         //2.选中项加入白色背景和替换为选中图片
         val childAt = tabLayout.getChildAt(selectPosition) as LinearLayout
@@ -128,12 +131,7 @@ object BottomNavUtils {
 
         tabSelectAnim(childAt)
         //选中字体变黑色
-        (childAt.getChildAt(1) as TextView).setTextColor(
-            ContextCompat.getColor(
-                tabLayout.context,
-                R.color.black
-            )
-        )
+        (childAt.getChildAt(1) as TextView).setTextColor(textColorSelect)
         //3.联动ViewPager
         viewPager?.currentItem = selectPosition
     }
