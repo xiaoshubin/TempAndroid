@@ -5,8 +5,10 @@ import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.TextView
 import java.util.regex.Pattern
 
 /**
@@ -129,5 +131,37 @@ object EditTextUtils {
                 } else null
             }
         et.filters = arrayOf(emojiFilter)
+    }
+
+    /**
+     * 设置了搜索事件的EditText
+     * 注意一定要设置 android:singleLine="true"，才会显示搜索
+    <EditText
+    android:singleLine="true"
+    android:imeOptions="actionSearch"
+    android:textColorHint="#CCCCCC"
+    android:drawablePadding="8dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="32dp"
+    android:textSize="12sp"
+    android:hint="城市中文名称"
+    android:paddingLeft="16dp"
+    android:drawableLeft="@mipmap/ic_search_gray"
+    android:id="@+id/et_search"
+    android:background="@drawable/gray_round66_bg"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"/>
+     */
+    fun setOnSearch(et:EditText,cb:(String?)->Unit){
+        et.setOnEditorActionListener(object :TextView.OnEditorActionListener{
+            override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    cb.invoke(v.text.toString())
+                    return true
+                }
+                return false
+            }
+        })
     }
 }

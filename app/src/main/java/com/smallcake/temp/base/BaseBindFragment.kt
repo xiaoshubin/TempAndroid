@@ -1,5 +1,6 @@
 package com.smallcake.temp.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,4 +48,5 @@ abstract class BaseBindFragment<VB : ViewBinding>: Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    fun goActivity(clz: Class<*>) = startActivity(Intent(requireActivity(), clz))
 }
