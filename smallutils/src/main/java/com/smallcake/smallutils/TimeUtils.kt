@@ -105,7 +105,8 @@ object TimeUtils {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
-        return (date?.time?:0L/1000L).toInt()
+        val lastData = date?.time?:0L
+        return (lastData/1000L).toInt()
     }
 
     /**
