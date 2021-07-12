@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自动换行控件-->
+    <declare-styleable name="AutoNewLineLayout">
+        <attr name="horizontalSpace" format="dimension|reference"/>
+        <attr name="vertivalSpace" format="dimension|reference"/>
+    </declare-styleable>
+</resources>
