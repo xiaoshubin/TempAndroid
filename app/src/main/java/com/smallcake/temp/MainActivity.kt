@@ -4,8 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import coil.load
+import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.lxj.xpopup.XPopup
 import com.smallcake.smallutils.CameraUtils
 import com.smallcake.smallutils.MediaUtils
 import com.smallcake.smallutils.ShapeCreator
@@ -17,6 +19,7 @@ import com.smallcake.temp.databinding.ActivityMainBinding
 import com.smallcake.temp.module.MobileViewModule
 import com.smallcake.temp.utils.BottomNavUtils
 import com.smallcake.temp.utils.ldd
+import com.smallcake.temp.utils.showToast
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,16 +31,38 @@ class MainActivity : BaseBindActivity<ActivityMainBinding>() {
         bar.hide()
         initView()
         onEvent()
+        checkPermission()
     }
 
     private fun onEvent() {
         bind.btnGet.setOnClickListener{
-            goActivity(TestActivity::class.java)
+            MediaUtils.startRecord(this)
         }
         bind.btnGet2.setOnClickListener{
-            MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
+            MediaUtils.stopRecord()
+            ldd("录制的音频路径为："+MediaUtils.filePath)
         }
 
+    }
+    private fun checkPermission(){
+        XXPermissions.with(this)
+            .permission(Permission.RECORD_AUDIO)
+            .request(object : OnPermissionCallback {
+                override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
+                    if (all){
+
+                    }
+                }
+                override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
+                    super.onDenied(permissions, never)
+                    if (never) {
+                        // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                        XXPermissions.startPermissionActivity(this@MainActivity, permissions)
+                    } else {
+                        showToast("获取定位权限失败")
+                    }
+                }
+            })
     }
 
     private fun initView() {

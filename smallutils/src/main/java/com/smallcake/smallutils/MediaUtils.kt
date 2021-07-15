@@ -1,13 +1,19 @@
 package com.smallcake.smallutils
 
+import android.app.Activity
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.net.Uri
+import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.MediaController
 import android.widget.VideoView
+import java.io.File
+import java.io.IOException
+import java.util.*
 
 
 object MediaUtils{
@@ -54,5 +60,50 @@ object MediaUtils{
         videoView.setMediaController(mediaController)
         videoView.setVideoURI(video)
         videoView.start()
+    }
+    var mMediaRecorder:MediaRecorder?=null
+    var filePath = ""
+    fun startRecord(activity: Activity) {
+        // 开始录音
+        /* ①Initial：实例化MediaRecorder对象 */
+        if (mMediaRecorder == null) mMediaRecorder = MediaRecorder()
+        try {
+            /* ②setAudioSource/setVedioSource */
+            mMediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC) // 设置麦克风
+            /*
+         * ②设置输出文件的格式：THREE_GPP/MPEG-4/RAW_AMR/Default THREE_GPP(3gp格式
+         * ，H263视频/ARM音频编码)、MPEG-4、RAW_AMR(只支持音频且音频编码要求为AMR_NB)
+         */mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            /* ②设置音频文件的编码：AAC/AMR_NB/AMR_MB/Default 声音的（波形）的采样 */mMediaRecorder?.setAudioEncoder(
+                MediaRecorder.AudioEncoder.AAC
+            )
+            val fileName = "${System.currentTimeMillis()}.m4a"
+
+             filePath = "${activity.externalCacheDir}/$fileName"
+            /* ③准备 */mMediaRecorder?.setOutputFile(filePath)
+            mMediaRecorder?.prepare()
+            /* ④开始 */mMediaRecorder?.start()
+        } catch (e: IllegalStateException) {
+            Log.i(">>>","call startAmr(File mRecAudioFile) failed!" + e.message)
+        } catch (e: IOException) {
+            Log.i(">>>","call startAmr(File mRecAudioFile) failed!" + e.message)
+        }
+    }
+
+    fun stopRecord() {
+        try {
+            mMediaRecorder!!.stop()
+            mMediaRecorder!!.release()
+            mMediaRecorder = null
+
+        } catch (e: RuntimeException) {
+            Log.i(">>>",e.toString())
+            mMediaRecorder!!.reset()
+            mMediaRecorder!!.release()
+            mMediaRecorder = null
+            val file = File(filePath)
+            if (file.exists()) file.delete()
+            filePath = ""
+        }
     }
 }
