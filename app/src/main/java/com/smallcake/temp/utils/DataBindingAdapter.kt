@@ -1,5 +1,6 @@
 package com.smallcake.temp.utils
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.load
@@ -18,6 +19,17 @@ object DataBindingAdapter {
     fun bindUrl(view: ImageView, imageUrl: String?) {
         view.load(imageUrl)
     }
+
+    @JvmStatic
+    @BindingAdapter(value = ["imgUrl", "placeholder"],requireAll = false)
+    fun imgUrl(view: ImageView, url: String?,placeDrawable: Drawable) {
+        view.load(url){
+            placeholder(placeDrawable)
+        }
+    }
+
+
+
 
 
 }
