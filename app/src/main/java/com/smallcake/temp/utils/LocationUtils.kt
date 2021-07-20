@@ -160,4 +160,14 @@ object LocationUtils {
         }
         return null
     }
+
+    /**
+     * 根据定位坐标，获取定位地址结果
+     * @param activity Activity
+     * @param location Location
+     */
+    fun getAddress(activity: Activity,location: Location){
+        val address = Geocoder(activity).getFromLocation(location.latitude, location.longitude, 1)[0]
+        ldd("定位：${address}")
+    }
 }
