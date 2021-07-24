@@ -14,7 +14,7 @@ import com.smallcake.temp.utils.showToast
  * 网络数据监控调试器
  */
 class HttpDebug(mContext: Context, parent: ViewGroup) {
-    var isDebug:Boolean = BuildConfig.DEBUG//是否开启了调试模式
+    var isDebug:Boolean = !BuildConfig.DEBUG//是否开启了调试模式
     init {
         if (isDebug){
             val httpDebugText = LayoutInflater.from(mContext).inflate(R.layout.http_debug_text, parent, true)
