@@ -17,6 +17,7 @@ import java.util.*
 
 
 object MediaUtils{
+    private const val TAG = "MediaUtils"
     /**
      * 播放res/raw资源下的mp3音频文件
      * 例如：MediaUtils.playMp3("zltx.mp3",R.raw::class.java)
@@ -90,6 +91,9 @@ object MediaUtils{
         }
     }
 
+    /**
+     * 停止录音
+     */
     fun stopRecord() {
         try {
             mMediaRecorder!!.stop()
@@ -105,5 +109,49 @@ object MediaUtils{
             if (file.exists()) file.delete()
             filePath = ""
         }
+    }
+    /**
+     * 播放音频
+     * @param audioPath String
+     */
+    fun playVoice(audioPath: String){
+        try {
+            val mediaPlayer =  MediaPlayer()
+            mediaPlayer.setDataSource(audioPath)
+            val attributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setLegacyStreamType(AudioManager.STREAM_MUSIC)
+                .build()
+            mediaPlayer.setAudioAttributes(attributes)
+            mediaPlayer.prepareAsync()
+            mediaPlayer.setOnPreparedListener{
+                mediaPlayer.start()
+            }
+
+        } catch (e: Exception) {
+        }
+    }
+
+    /**
+     * 获取音频时长
+     * @param filePath String?
+     * @return Int 秒
+     */
+    fun getAudioFileVoiceTime(filePath: String?): Int {
+        var mediaPlayerDuration = 0L
+        if (filePath.isNullOrEmpty()) return 0
+        val mediaPlayer = MediaPlayer()
+        try {
+            mediaPlayer.setDataSource(filePath)
+            mediaPlayer.prepare()
+            mediaPlayerDuration = mediaPlayer.duration.toLong()
+        } catch (ioException: IOException) {
+            ioException.message?.let { Log.e(TAG, it) }
+        }
+        mediaPlayer.stop()
+        mediaPlayer.reset()
+        mediaPlayer.release()
+        return (mediaPlayerDuration/1000).toInt()
     }
 }

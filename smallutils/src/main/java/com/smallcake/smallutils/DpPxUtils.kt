@@ -16,6 +16,11 @@ object DpPxUtils {
             ?.displayMetrics?.density ?:0.0f
         return (dpValue * scale + 0.5f).toInt()
     }
+    fun dp2px(dpValue: Int): Int {
+        val scale = SmallUtils.context?.applicationContext?.resources
+            ?.displayMetrics?.density ?:0.0f
+        return (dpValue * scale + 0.5f).toInt()
+    }
 
     fun px2dp(pxValue: Float): Int {
         val scale =
