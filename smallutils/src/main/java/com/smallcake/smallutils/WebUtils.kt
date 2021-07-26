@@ -14,8 +14,8 @@ class WebUtils {
      * 更多参考：https://www.jianshu.com/p/d2acd79c3d32
      */
     fun autoImg(content: String?):String?{
-        return content?.apply {
-            replace("<img", "<img style='max-width:100%;height:auto")
+        return content?.run {
+            replace("<img", "<img style=\"max-width:100%;height:auto\"")
         }
     }
 
