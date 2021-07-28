@@ -116,6 +116,8 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     //mmkv用于替代SharedPreferences
     implementation 'com.tencent:mmkv-static:1.2.7'
+    //可定制Tabs
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
 
     /**
      * ------------------------------------------下面为一些常用可选的第三方库---------------------------------------------------
