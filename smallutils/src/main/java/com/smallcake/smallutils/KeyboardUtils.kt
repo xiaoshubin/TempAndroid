@@ -36,7 +36,7 @@ object KeyboardUtils {
         }
     }
 
-    private fun hintKeyboard(activity: Activity) {
+     fun hintKeyboard(activity: Activity) {
         val imm: InputMethodManager =
             activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (imm.isActive && activity.currentFocus != null) {

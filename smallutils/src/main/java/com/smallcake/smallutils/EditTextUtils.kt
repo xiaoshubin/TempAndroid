@@ -1,5 +1,6 @@
 package com.smallcake.smallutils
 
+import android.app.Activity
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextUtils
@@ -134,6 +135,7 @@ object EditTextUtils {
     }
 
     /**
+     * 点击输入文本的搜索后，清空文本，并收起键盘
      * 设置了搜索事件的EditText
      * 注意一定要设置 android:singleLine="true"，才会显示搜索
     <EditText
@@ -153,11 +155,13 @@ object EditTextUtils {
     android:layout_width="match_parent"
     android:layout_height="34dp"/>
      */
-    fun setOnSearch(et:EditText,cb:(String?)->Unit){
+    fun setOnSearch(activity: Activity, et:EditText, cb:(String?)->Unit){
         et.setOnEditorActionListener(object :TextView.OnEditorActionListener{
             override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     cb.invoke(v.text.toString())
+                    et.setText("")
+                    KeyboardUtils.hintKeyboard(activity)
                     return true
                 }
                 return false
