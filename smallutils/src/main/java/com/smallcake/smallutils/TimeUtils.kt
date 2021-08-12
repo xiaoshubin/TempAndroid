@@ -161,5 +161,46 @@ object TimeUtils {
         return (calendar.time.time/1000L).toInt()
     }
 
+    /**
+     * 和现在的时间对比的时间差
+     * @param dateTime String
+     * @return Int 秒
+     */
+    fun diffTime(dateTime: String): Int {
+        var timeInt=0
+        if (dateTime.length==16){
+            timeInt = strToDate(dateTime,"yyyy-MM-dd HH:mm")
+        }else if (dateTime.length==19){
+            timeInt = strToDate(dateTime,"yyyy-MM-dd HH:mm:ss")
+        }
+        val c = Calendar.getInstance()
+        val currentTime = c.timeInMillis/1000
+        c.set(Calendar.SECOND,timeInt)
+        val newTime = c.timeInMillis/1000
+        return (currentTime - newTime).toInt()
+    }
+
+    /**
+     * 时间转换为1天00：00：00
+     * @param timeX Int
+     * @return String
+     */
+    fun timeToDhms(timeX: Int): String {
+        val dayUnit = 24 * 60 * 60
+        val hourUnit = 60 * 60
+        val dayInt = timeX / (dayUnit)
+        val hourInt = (timeX - dayInt * dayUnit) / (hourUnit)
+        val minutesInt = (timeX - dayInt * dayUnit - hourInt * hourUnit) / 60
+        val secoundInt = timeX - dayInt * dayUnit - hourInt * hourUnit - minutesInt * 60
+
+        val dayStr = if (dayInt > 0) "${dayInt}天" else ""
+        val hourStr = if (hourInt==0)"00" else (if (hourInt < 9) "0${hourInt}" else "$hourInt")
+
+        val minutesStr = if (minutesInt==0)"00" else(if (minutesInt < 9) "0${minutesInt}" else "$minutesInt")
+        val secoundStr = if (secoundInt==0)"00" else(if (secoundInt < 9) "0${secoundInt}" else "$secoundInt")
+
+        return "$dayStr$hourStr:$minutesStr:$secoundStr"
+    }
+
 
 }
