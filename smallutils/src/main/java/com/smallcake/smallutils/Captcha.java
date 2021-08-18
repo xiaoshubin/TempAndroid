@@ -58,7 +58,7 @@ public class Captcha {
         Canvas canvas = new Canvas(bitmap);
         code = TextUtils.isEmpty(code) ? createCode() : code;
         RectF rectF = new RectF(0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        float radius = DpPxUtils.INSTANCE.dp2px(0f);
+        float radius = DpUtils.INSTANCE.dp2px(0f);
         canvas.drawColor(Color.parseColor("#040323"));
         Paint bgPaint = new Paint();
         bgPaint.setColor(DEFAULT_COLOR);

@@ -2,9 +2,8 @@ package com.smallcake.temp.utils
 
 import android.content.Context
 import android.graphics.Color
-import android.view.View
 import androidx.core.content.ContextCompat
-import com.smallcake.smallutils.DpPxUtils
+import com.smallcake.smallutils.DpUtils
 import com.smallcake.temp.R
 import com.yx.jiading.utils.sizeNull
 import net.lucode.hackware.magicindicator.FragmentContainerHelper
@@ -54,7 +53,7 @@ object TabUtils {
                     yOffset = 30f
                     lineWidth = 60f
                     setColors(ContextCompat.getColor(context, R.color.darkcyan))
-                    roundRadius = DpPxUtils.dp2pxFloat(2f)
+                    roundRadius = DpUtils.dp2pxFloat(2f)
                     mode = LinePagerIndicator.MODE_EXACTLY
                 }
 

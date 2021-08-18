@@ -25,7 +25,7 @@ class DragHelper(private val view: View) {
         width = view.measuredWidth
         height = view.measuredHeight
         maxWidth = Screen.width
-        maxHeight = Screen.height - DpPxUtils.dp2px(60f)-topMargin
+        maxHeight = Screen.height - DpUtils.dp2px(60f)-topMargin
     }
 
     /**

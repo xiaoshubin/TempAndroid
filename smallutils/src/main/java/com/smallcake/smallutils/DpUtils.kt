@@ -4,7 +4,7 @@ package com.smallcake.smallutils
 /**
  * 单位转换
  */
-object DpPxUtils {
+object DpUtils {
     fun dp2pxFloat(dpValue: Float): Float {
         val scale =
            SmallUtils.context?.resources?.displayMetrics?.density?:0.0f
