@@ -168,6 +168,12 @@ object EditTextUtils {
             }
         })
     }
+    /**
+     * 移动到末尾
+     */
+    fun setLastLoca(et:EditText){
+        et.setSelection(et.text.length)
+    }
 }
 
 fun EditText.addAfterTextChangeListener(cb:(Editable?)->Unit){
