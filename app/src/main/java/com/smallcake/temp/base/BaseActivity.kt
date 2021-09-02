@@ -38,9 +38,16 @@ abstract class BaseActivity : AppCompatActivity() {
         ActivityCollector.removeActivity(this)
         mBinder?.unbind()
     }
+    fun getLoadDialog():LoadDialog{
+        return dialog
+    }
     //去其他页面，不传参
     fun goActivity(clz: Class<*>) = startActivity(Intent(this, clz))
-
+    fun goActivity(clz: Class<*>,id:String?){
+        val intent = Intent(this, clz)
+        intent.putExtra("id",id)
+        startActivity(intent)
+    }
 
 }
 
