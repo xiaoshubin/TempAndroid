@@ -20,7 +20,7 @@ object StringUtils {
      * 是纯字母
      */
     fun isJustLetter(str: String): Boolean {
-        val p = Pattern.compile("[a-zA-Z]")
+        val p = Pattern.compile("[a-zA-Z]+")
         val m = p.matcher(str)
         return m.matches()
     }
