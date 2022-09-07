@@ -118,6 +118,8 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.2.7'
     //可定制Tabs
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
+    //shape可以帮助你少写很多样式xml
+    implementation 'com.github.getActivity:ShapeView:8.3'
 
     /**
      * ------------------------------------------下面为一些常用可选的第三方库---------------------------------------------------
