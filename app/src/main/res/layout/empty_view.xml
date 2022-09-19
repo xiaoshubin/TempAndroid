@@ -28,17 +28,5 @@
             tools:text="暂无数据"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <com.smallcake.smallutils.text.ShapeTextButton
-            android:id="@+id/btn"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:textColor="@color/white"
-            app:stb_solidColor="@color/dodgerblue"
-            app:stb_radius="@dimen/dp_20"
-            android:text="开始安全培训"
-            android:layout_margin="32dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40" />
     </LinearLayout>
 </layout>

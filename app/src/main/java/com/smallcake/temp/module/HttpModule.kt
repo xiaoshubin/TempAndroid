@@ -9,7 +9,7 @@ import com.smallcake.temp.api.WeatherApi
 import com.smallcake.temp.api.WeatherImpl
 import com.smallcake.temp.base.Constant
 import com.smallcake.temp.http.DataProvider
-import com.smallcake.temp.http.HttpLogInterceptor
+import com.smallcake.temp.http.HandleErrorInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -35,7 +35,7 @@ val httpModule = module {
 
     //网络请求okhttp客户端
     val okHttpClientBuilder: OkHttpClient.Builder =OkHttpClient.Builder()
-    okHttpClientBuilder.addInterceptor(HttpLogInterceptor())//日志打印拦截器
+    okHttpClientBuilder.addInterceptor(HandleErrorInterceptor())//日志打印拦截器
 
 
     //公共头部拦截器

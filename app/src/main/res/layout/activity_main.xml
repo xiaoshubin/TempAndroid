@@ -10,9 +10,6 @@
         <variable
             name="user"
             type="com.smallcake.temp.bean.UserBean" />
-        <variable
-            name="viewmodel"
-            type="com.smallcake.temp.module.MobileViewModule" />
     </data>
 
     <LinearLayout

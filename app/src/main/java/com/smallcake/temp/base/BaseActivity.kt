@@ -12,8 +12,6 @@ import com.smallcake.temp.module.LoadDialog
 import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import com.trello.rxlifecycle2.LifecycleProvider
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 
 /**
  * Activity基类
