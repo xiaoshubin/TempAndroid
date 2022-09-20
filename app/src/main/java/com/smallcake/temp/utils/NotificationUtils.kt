@@ -36,10 +36,10 @@ object NotificationUtils {
         } else {
             NotificationCompat.Builder(MyApplication.instance)
         }
-        val largeBitmap = BitmapFactory.decodeResource(MyApplication.instance.resources,R.mipmap.ic_launcher_round)
+        val largeBitmap = BitmapFactory.decodeResource(MyApplication.instance.resources,R.mipmap.ic_launcher)
         val notification = builder
             .setLargeIcon(largeBitmap)//大图，右侧的图标
-            .setSmallIcon(R.mipmap.ic_launcher_round)//必须添加（Android 8.0,最好32*32像素大小
+            .setSmallIcon(R.mipmap.ic_launcher)//必须添加（Android 8.0,最好32*32像素大小
             .setChannelId(AppUtils.getAppPackageName())//必须添加（Android 8.0） 【唯一标识】
             .setContentTitle(title)
             .setWhen(System.currentTimeMillis())

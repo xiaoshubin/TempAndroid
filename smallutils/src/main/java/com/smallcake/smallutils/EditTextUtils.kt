@@ -1,14 +1,12 @@
 package com.smallcake.smallutils
 
 import android.app.Activity
-import android.text.Editable
-import android.text.InputFilter
-import android.text.TextUtils
-import android.text.TextWatcher
+import android.text.*
 import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import java.util.regex.Pattern
 
@@ -174,6 +172,32 @@ object EditTextUtils {
     fun setLastLoca(et:EditText){
         et.setSelection(et.text.length)
     }
+
+    /**
+     * 显示和隐藏密码
+     * @param ivEye ImageView
+     * @param etPass EditText
+     * @param icEyeOpen Int 显示图标文件
+     * @param icEyeClose Int 隐藏图标文件
+     */
+    fun showAndHidePass(ivEye:ImageView,etPass:EditText,icEyeOpen:Int,icEyeClose:Int){
+        var isShowPass = !TextUtils.isEmpty(ivEye.tag as String?)
+        ivEye.setOnClickListener {
+            if (isShowPass){
+                ivEye.setImageResource(icEyeClose)
+                isShowPass =false
+                etPass.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }else{
+                ivEye.setImageResource(icEyeOpen)
+                isShowPass =true
+                etPass.inputType = InputType.TYPE_CLASS_TEXT
+            }
+            // 使光标始终在最后位置
+            setLastLoca(etPass)
+        }
+    }
+
+
 }
 
 fun EditText.addAfterTextChangeListener(cb:(Editable?)->Unit){
