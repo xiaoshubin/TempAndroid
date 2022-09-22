@@ -24,7 +24,7 @@ import com.smallcake.smallutils.DpUtils
  * @see isBorder         是否需要外边框 默认需要外边框
  */
 
-class GridItemDecoration(val spanCount:Int, space:Float=8f, @ColorInt dividerColor:Int=Color.TRANSPARENT,private val isBorder:Boolean=true): RecyclerView.ItemDecoration() {
+class GridItemDecoration(val spanCount:Int=1, space:Float=8f, @ColorInt dividerColor:Int=Color.TRANSPARENT,private val isBorder:Boolean=true): RecyclerView.ItemDecoration() {
     private val spaceSize = DpUtils.dp2px(space)
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     init {

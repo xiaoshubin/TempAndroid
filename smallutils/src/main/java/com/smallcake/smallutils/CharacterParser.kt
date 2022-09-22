@@ -839,6 +839,7 @@ object CharacterParser {
      *
      * */
     fun convert(str: String?): String? {
+        if (str=="重")return "chong"
         var result: String? = null
         val ascii = getChsAscii(str!!)
         if (ascii > 0 && ascii < 160) {

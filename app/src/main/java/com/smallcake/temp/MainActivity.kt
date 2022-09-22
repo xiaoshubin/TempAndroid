@@ -38,6 +38,36 @@ showToast("获取定位权限失败")
 }
 })
 }
+
+bind.recyclerView.apply {
+addItemDecoration(GridItemDecoration())
+layoutManager = LinearLayoutManager(context)
+adapter  = mAdapter
+}
+
+
+mAdapter.apply {
+setEmptyId()
+loadMoreModule.setOnLoadMoreListener {
+page++
+loadData()
+}
+setOnItemClickListener{adapter,_,postion->
+val item = adapter.getItem(postion) as AnnouncementList
+goActivity(NoticeInfoActivity::class.java,item.announcementId)
+}
+}
+数据加载更多模板
+val list = it.data
+mAdapter.apply {
+if (list.sizeNull() > 0) {
+if (page == 1) setList(list) else addData(list!!)
+loadMoreModule.loadMoreComplete()
+} else {
+if (page == 1) setList(list)
+loadMoreModule.loadMoreEnd()
+}
+}
  */
 class MainActivity : BaseBindActivity<ActivityMainBinding>() {
 
