@@ -1,32 +1,18 @@
-package com.smallcake.temp.module;
+package com.smallcake.temp.module
 
-import android.app.Dialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.TextView;
+import android.app.Dialog
+import android.content.Context
+import com.smallcake.temp.R
+import android.os.Bundle
+import android.widget.TextView
+import android.text.TextUtils
+import android.view.View
 
-import com.smallcake.temp.R;
-
-
-public class LoadDialog extends Dialog {
-	String text;
-	Context mContext;
-	public LoadDialog(Context context) {
-		this(context, "");
-	}
-	public LoadDialog(Context context, String text) {
-		super(context, R.style.Theme_Ios_Dialog);
-		this.text = text;
-		this.mContext = context;
-	}
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.smallcake_utils_loading_dialog);
-		setCanceledOnTouchOutside(false);
-		((TextView)findViewById(R.id.tv_load_dialog)).setText(TextUtils.isEmpty(text)?"加载中...":text);
-	}
-	
+class LoadDialog @JvmOverloads constructor(mContext: Context, var text: String = "") : Dialog(mContext, R.style.Theme_Ios_Dialog) {
+    override fun onCreate(savedInstanceState: Bundle) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.smallcake_utils_loading_dialog)
+        setCanceledOnTouchOutside(false)
+        (findViewById<View>(R.id.tv_load_dialog) as TextView).text = if (TextUtils.isEmpty(text)) "加载中..." else text
+    }
 }
