@@ -17,27 +17,18 @@ import com.smallcake.temp.utils.showToast
 import java.util.*
 
 /**
- * 申请权限
-private fun checkPermission(){
-XXPermissions.with(this)
-.permission(Permission.RECORD_AUDIO)
-.request(object : OnPermissionCallback {
-override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
-if (all){
-
+ *如何用registerForActivityResult替代onActivityResult
+ * 发起并接收
+private val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+if (activityResult.resultCode == Activity.RESULT_OK) {
+val address = activityResult.data?.getStringExtra("address")
+bind.etAddress.setText(address)
 }
 }
-override fun onDenied(permissions: MutableList<String>?, never: Boolean) {
-super.onDenied(permissions, never)
-if (never) {
-// 如果是被永久拒绝就跳转到应用权限系统设置页面
-XXPermissions.startPermissionActivity(this@MainActivity, permissions)
-} else {
-showToast("获取定位权限失败")
-}
-}
-})
-}
+val intent = Intent()
+intent.putExtra("address",address)
+setResult(RESULT_OK, intent)
+finish()
 
 bind.recyclerView.apply {
 addItemDecoration(GridItemDecoration())
