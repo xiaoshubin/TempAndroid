@@ -90,7 +90,7 @@ dependencies {
     //ViewBinding基类
     implementation "com.dylanc:viewbinding-ktx:1.0.1"
     //权限管理
-    implementation "com.hjq:xxpermissions:9.8"
+    implementation "com.github.getActivity:XXPermissions:16.0"
     // Koin for Android
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"

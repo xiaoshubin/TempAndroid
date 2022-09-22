@@ -1,6 +1,7 @@
 package com.smallcake.temp.utils
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -94,11 +95,11 @@ object LocationUtils {
     }
 
 
-    private fun startLocation(activity: Activity,locationManager: LocationManager,listener: (location:Location)->Unit?) {
+    @SuppressLint("MissingPermission")
+    private fun startLocation(activity: Activity, locationManager: LocationManager, listener: (location:Location)->Unit?) {
         Log.e(TAG,"gps已打开，开始获取定位权限....")
         //为获取地理位置信息时设置查询条件 是按GPS定位还是network定位
-        if (ActivityCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (XXPermissions.isGranted(activity,Permission.ACCESS_FINE_LOCATION,Permission.ACCESS_COARSE_LOCATION)){
             requestPermission(activity)
             return
         }
@@ -107,7 +108,6 @@ object LocationUtils {
         Log.e(TAG,"定位配置：$bestProvider,  开始通过配置获取本地定位对象...")
         //定位方法，第二个参数指的是产生位置改变事件的时间间隔，单位为微秒，第三个参数指的是距离条件，单位为米
         val locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0f,
             object : LocationListener {
                 override fun onLocationChanged(location: Location) {
@@ -125,7 +125,7 @@ object LocationUtils {
      */
     private fun requestPermission(activity: Activity) {
         XXPermissions.with(activity)
-            .permission(Permission.ACCESS_FINE_LOCATION)
+            .permission(Permission.ACCESS_FINE_LOCATION,Permission.ACCESS_COARSE_LOCATION)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>?, all: Boolean) {
                     if (all){
